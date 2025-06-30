@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5435/auth-db
-#    url: jdbc:postgresql://auth-db:5432/auth-db
-    username: auth
-    password: auth
+    url: jdbc:postgresql://localhost:5435/user-db
+#    url: jdbc:postgresql://auth-db:5432/user-db
+    username: user
+    password: user
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 5 #Настройки пула соединений (HikariCP — дефолтный пул в Spring Boot).

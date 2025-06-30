@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
-import ru.telros.practicum.AuthServiceApp;
+import ru.telros.practicum.UserServiceApp;
 import ru.telros.practicum.dto.auth_service.AuthRequest;
 import ru.telros.practicum.dto.auth_service.AuthResponse;
 import ru.telros.practicum.dto.auth_service.RegisterRequest;
@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@SpringBootTest(classes = AuthServiceApp.class)
+@SpringBootTest(classes = UserServiceApp.class)
 @AutoConfigureMockMvc
 @Transactional
 public class AuthIntegrationTest {

@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>auth_service</module>
+        <module>user_service</module>
 
         <module>infra</module>
         <module>api-commons</module>
