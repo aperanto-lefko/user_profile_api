@@ -9,6 +9,5 @@ import ru.telros.practicum.entity.User;
 public interface UserMapper {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "login", target = "login")
-    @Mapping(source = "name", target = "name")
     UserDto toDto(User user);
 }

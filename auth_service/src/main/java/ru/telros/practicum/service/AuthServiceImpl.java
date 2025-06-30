@@ -1,5 +1,6 @@
 package ru.telros.practicum.service;
 
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -9,12 +10,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.telros.practicum.dto.auth_service.AuthRequest;
 import ru.telros.practicum.dto.auth_service.AuthResponse;
+import ru.telros.practicum.dto.auth_service.RegisterRequest;
 import ru.telros.practicum.dto.auth_service.UserDto;
 import ru.telros.practicum.entity.User;
 import ru.telros.practicum.exception.InvalidCredentialsException;
+import ru.telros.practicum.exception.UserAlreadyExistsException;
 import ru.telros.practicum.exception.UserNotFoundException;
 import ru.telros.practicum.mapper.UserMapper;
 import ru.telros.practicum.repository.UserRepository;
@@ -31,6 +35,7 @@ public class AuthServiceImpl implements AuthService {
     JwtProvider jwtProvider;
     UserRepository userRepository;
     UserMapper mapper;
+    PasswordEncoder passwordEncoder;
 
     /**
      * Аутентифицирует пользователя по логину и паролю.
@@ -67,17 +72,26 @@ public class AuthServiceImpl implements AuthService {
         }
     }
     /**
-     * Возвращает пользователя по его идентификатору.
+     * Регистрирует нового пользователя.
      * <p>
-     * Если пользователь с указанным ID не найден, выбрасывается исключение {@link UserNotFoundException}.
+     * Проверяет уникальность логина, хеширует пароль и сохраняет пользователя в базу данных.
+     * В случае, если пользователь с таким логином уже существует, выбрасывается исключение {@link UserAlreadyExistsException}.
      *
-     * @param userId уникальный идентификатор пользователя
-     * @return найденный пользователь
-     * @throws UserNotFoundException если пользователь с таким ID не существует
+     * @param request {@link RegisterRequest} данные для регистрации пользователя
+     * @return сохранённый пользователь
+     * @throws UserAlreadyExistsException если пользователь с таким логином уже существует
      */
-    public UserDto getUserById(UUID userId) {
-        return userRepository.findById(userId)
-                .map(mapper::toDto)
-                .orElseThrow(() -> new UserNotFoundException(userId));
+    @Transactional
+    public UserDto register(RegisterRequest request) {
+        if (userRepository.existsByLogin(request.getLogin())) {
+            throw new UserAlreadyExistsException(request.getLogin());
+        }
+        String encodedPassword = passwordEncoder.encode(request.getPassword());
+        User user = User.builder()
+                .login(request.getLogin())
+                .password(encodedPassword)
+                .build();
+
+        return mapper.toDto(userRepository.save(user));
     }
 }

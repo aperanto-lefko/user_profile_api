@@ -13,6 +13,5 @@ public class RegisterRequest {
     private String login;
     @NotBlank(message = "Password cannot be blank")
     private String password;
-    @NotBlank(message = "Name cannot be blank")
-    private String name;
+
 }
