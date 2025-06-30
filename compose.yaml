@@ -17,6 +17,22 @@ services:
     networks:
       - microservices-net
 
+  user-db:
+    image: postgres:16.1
+    container_name: user-db
+    ports:
+      - "5436:5432"
+    environment:
+      - POSTGRES_DB=user-db
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=user
+    healthcheck:
+      test: pg_isready -q -d $$POSTGRES_DB -U $$POSTGRES_USER
+      timeout: 10s
+      interval: 10s
+      retries: 15
+    networks:
+      - microservices-net
 
   discovery-server:
     build:
