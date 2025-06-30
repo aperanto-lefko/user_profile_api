@@ -1,0 +1,89 @@
+services:
+
+  auth-db:
+    image: postgres:16.1
+    container_name: auth-db
+    ports:
+      - "5435:5432"
+    environment:
+      - POSTGRES_DB=auth-db
+      - POSTGRES_USER=auth
+      - POSTGRES_PASSWORD=auth
+    healthcheck:
+      test: pg_isready -q -d $$POSTGRES_DB -U $$POSTGRES_USER
+      timeout: 10s
+      interval: 10s
+      retries: 15
+    networks:
+      - microservices-net
+
+
+  discovery-server:
+    build:
+      context: .
+      dockerfile: infra/discovery_server/Dockerfile
+    container_name: discovery-server
+    ports:
+      - "8761:8761"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8761/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - microservices-net
+
+
+  config-server:
+    build:
+      context: .
+      dockerfile: infra/config_server/Dockerfile
+    container_name: config-server
+    ports:
+      - "8888:8888"
+    depends_on:
+      discovery-server:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8888/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-server:8761/eureka/
+    networks:
+      - microservices-net
+
+
+
+  auth-service:
+    build:
+      context: .
+      dockerfile: auth_service/Dockerfile
+    container_name: auth-service
+    depends_on:
+      config-server:
+        condition: service_healthy
+      auth-db:
+        condition: service_healthy
+    environment:
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-server:8761/eureka/
+
+    networks:
+      - microservices-net
+  gateway-service:
+    build:
+      context: .
+      dockerfile: infra/gateway/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-server:8761/eureka/
+    depends_on:
+      config-server:
+        condition: service_healthy
+    networks:
+      - microservices-net
+networks:
+  microservices-net:
+    driver: bridge
