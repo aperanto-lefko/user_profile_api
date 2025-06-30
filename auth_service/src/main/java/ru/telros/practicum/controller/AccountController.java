@@ -8,21 +8,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.telros.practicum.dto.auth_service.UserDto;
-import ru.telros.practicum.service.UserService;
+import ru.telros.practicum.dto.auth_service.AccountDto;
+import ru.telros.practicum.service.AccountService;
 
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/internal/auth/users")
+@RequestMapping("/internal/auth/account")
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class UserController {
-    UserService userService;
+public class AccountController {
+    AccountService accountService;
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<UserDto> getUser(@PathVariable("userId") UUID userId) {
+    @GetMapping("/{accountId}")
+    public ResponseEntity<AccountDto> getAccount(@PathVariable("accountId") UUID accountId) {
 
-        return ResponseEntity.ok(userService.getUserById(userId));
+        return ResponseEntity.ok(accountService.getAccountById(accountId));
     }
 }

@@ -12,19 +12,16 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import ru.telros.practicum.dto.auth_service.AccountDto;
 import ru.telros.practicum.dto.auth_service.AuthRequest;
 import ru.telros.practicum.dto.auth_service.AuthResponse;
 import ru.telros.practicum.dto.auth_service.RegisterRequest;
-import ru.telros.practicum.dto.auth_service.UserDto;
-import ru.telros.practicum.entity.User;
+import ru.telros.practicum.entity.Account;
 import ru.telros.practicum.exception.InvalidCredentialsException;
-import ru.telros.practicum.exception.UserAlreadyExistsException;
-import ru.telros.practicum.exception.UserNotFoundException;
-import ru.telros.practicum.mapper.UserMapper;
-import ru.telros.practicum.repository.UserRepository;
+import ru.telros.practicum.exception.AccountAlreadyExistsException;
+import ru.telros.practicum.mapper.AccountMapper;
+import ru.telros.practicum.repository.AccountRepository;
 import ru.telros.practicum.security.JwtProvider;
-
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -33,8 +30,8 @@ import java.util.UUID;
 public class AuthServiceImpl implements AuthService {
     AuthenticationManager authenticationManager;
     JwtProvider jwtProvider;
-    UserRepository userRepository;
-    UserMapper mapper;
+    AccountRepository accountRepository;
+    AccountMapper mapper;
     PasswordEncoder passwordEncoder;
 
     /**
@@ -75,23 +72,23 @@ public class AuthServiceImpl implements AuthService {
      * Регистрирует нового пользователя.
      * <p>
      * Проверяет уникальность логина, хеширует пароль и сохраняет пользователя в базу данных.
-     * В случае, если пользователь с таким логином уже существует, выбрасывается исключение {@link UserAlreadyExistsException}.
+     * В случае, если пользователь с таким логином уже существует, выбрасывается исключение {@link AccountAlreadyExistsException}.
      *
      * @param request {@link RegisterRequest} данные для регистрации пользователя
      * @return сохранённый пользователь
-     * @throws UserAlreadyExistsException если пользователь с таким логином уже существует
+     * @throws AccountAlreadyExistsException если пользователь с таким логином уже существует
      */
     @Transactional
-    public UserDto register(RegisterRequest request) {
-        if (userRepository.existsByLogin(request.getLogin())) {
-            throw new UserAlreadyExistsException(request.getLogin());
+    public AccountDto register(RegisterRequest request) {
+        if (accountRepository.existsByLogin(request.getLogin())) {
+            throw new AccountAlreadyExistsException(request.getLogin());
         }
         String encodedPassword = passwordEncoder.encode(request.getPassword());
-        User user = User.builder()
+        Account account = Account.builder()
                 .login(request.getLogin())
                 .password(encodedPassword)
                 .build();
 
-        return mapper.toDto(userRepository.save(user));
+        return mapper.toDto(accountRepository.save(account));
     }
 }

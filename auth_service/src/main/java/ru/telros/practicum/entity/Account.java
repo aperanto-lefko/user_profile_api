@@ -20,13 +20,13 @@ import java.util.Collections;
 import java.util.UUID;
 
 @Entity
-@Table(name = "users")
+@Table(name = "accounts")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class User implements UserDetails {
+public class Account implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     UUID id;

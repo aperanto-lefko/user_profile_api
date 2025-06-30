@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.telros.practicum.dto.auth_service.AccountDto;
 import ru.telros.practicum.dto.auth_service.AuthRequest;
 import ru.telros.practicum.dto.auth_service.AuthResponse;
 import ru.telros.practicum.dto.auth_service.RegisterRequest;
-import ru.telros.practicum.dto.auth_service.UserDto;
 import ru.telros.practicum.service.AuthService;
 
 
@@ -24,7 +24,7 @@ public class AuthController {
     AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<UserDto> register(@Valid @RequestBody RegisterRequest request) {
+    public ResponseEntity<AccountDto> register(@Valid @RequestBody RegisterRequest request) {
         return ResponseEntity.ok(authService.register(request));
     }
 

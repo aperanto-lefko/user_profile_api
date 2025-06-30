@@ -99,9 +99,9 @@ docker compose build --no-cache && docker compose up
 #### Особенности запуска
 
 Для локального запуска из IDE после развертывания баз в docker в модуле config-server перед запуском следует 
-раскомментировать строки в application.yaml: url: jdbc:postgresql://user-db:5432/user-db для user-service и
+раскомментировать строки в application.yaml: url: jdbc:postgresql://account-db:5432/account-db для account-service и
 url: jdbc:postgresql://auth-db:5432/auth-db для auth-service
 
 ### Для тестирования
 
-В первую очередь производится регистрация в auth-service (логин, пароль), затем добавление данных в user service
+В первую очередь производится регистрация в auth-service (логин, пароль), затем добавление данных в account service
