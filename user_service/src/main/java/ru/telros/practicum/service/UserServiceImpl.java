@@ -7,6 +7,7 @@ import lombok.experimental.FieldDefaults;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ru.telros.practicum.dto.user_service.UserContactsDto;
 import ru.telros.practicum.dto.user_service.UserDetailsDto;
 import ru.telros.practicum.dto.user_service.UserDto;
 import ru.telros.practicum.entity.User;
@@ -28,16 +29,70 @@ public class UserServiceImpl implements UserService {
     UserMapper mapper;
     AuthServiceClient authServiceClient;
 
-
+    /**
+     * Загружает или обновляет фотографию пользователя.
+     *
+     * Если фотография уже была загружена ранее, она будет перезаписана новыми данными.
+     *
+     * @param userId идентификатор пользователя
+     * @param photoBytes массив байтов фотографии
+     *
+     * @throws UserNotFoundException если пользователь не найден
+     */
     public void uploadPhoto(UUID userId, byte[] photoBytes) {
+        log.info("Загрузка фотографии для пользователя с id {}", userId);
+        User user = findUserById(userId);
+        user.setPhoto(photoBytes);
+        log.info("Сохранение пользователя с фотографией");
+        userRepository.save(user);
 
+    }
+    /**
+     * Возвращает фотографию пользователя в виде массива байтов.
+     *
+     * Перед получением выполняется проверка существования аккаунта,
+     * а также проверка принадлежности пользователя к указанному аккаунту.
+     *
+     * @param userId идентификатор пользователя
+     * @param accountId идентификатор аккаунта, которому принадлежит пользователь
+     * @return массив байтов фотографии или {@code null}, если фотография отсутствует
+     *
+     * @throws AccountNotFoundException если аккаунт не существует
+     * @throws UserNotFoundException если пользователь не найден
+     */
+    public byte[] getPhoto(UUID userId, UUID accountId) {
+        log.info("Поиск фотографии для пользователя с id {}", userId);
+        checkAccount(accountId);
+        User user = findUserById(userId);
+        return user.getPhoto();
+    }
+    /**
+     * Удаляет фотографию пользователя.
+     *
+     * После удаления поле фотографии будет установлено в {@code null}.
+     * Перед удалением выполняется проверка существования аккаунта,
+     * а также проверка принадлежности пользователя к указанному аккаунту.
+     *
+     * @param userId идентификатор пользователя
+     * @param accountId идентификатор аккаунта, которому принадлежит пользователь
+     *
+     * @throws AccountNotFoundException если аккаунт не существует
+     * @throws UserNotFoundException если пользователь не найден
+     */
+    public void deletePhoto(UUID userId, UUID accountId) {
+        log.info("Удаление фотографии для пользователя с id {}", userId);
+        checkAccount(accountId);
+        User user = findUserById(userId);
+        user.setPhoto(null);
+        log.info("Сохранение пользователя с фотографией");
+        userRepository.save(user);
     }
 
     /**
      * Создаёт новый профиль пользователя и связывает его с существующим аккаунтом.
      *
-     * <p>Перед созданием выполняется проверка существования аккаунта по указанному идентификатору.
-     * Если аккаунт не существует, выбрасывается исключение {@link AccountNotFoundException}.</p>
+     * Перед созданием выполняется проверка существования аккаунта по указанному идентификатору.
+     * Если аккаунт не существует, выбрасывается исключение {@link AccountNotFoundException}.
      *
      * @param userDto   DTO с данными нового пользователя
      * @param accountId идентификатор аккаунта, к которому привязывается пользователь
@@ -58,9 +113,9 @@ public class UserServiceImpl implements UserService {
     /**
      * Удаляет профиль пользователя и связанный аккаунт.
      *
-     * <p>Выполняет проверку существования аккаунта перед удалением.
+     * Выполняет проверку существования аккаунта перед удалением.
      * Если аккаунт не найден, выбрасывается {@link AccountNotFoundException}.
-     * После удаления профиля пользователя выполняется запрос на удаление аккаунта через сервис авторизации.</p>
+     * После удаления профиля пользователя выполняется запрос на удаление аккаунта через сервис авторизации.
      *
      * @param userId    идентификатор пользователя
      * @param accountId идентификатор аккаунта
@@ -87,7 +142,7 @@ public class UserServiceImpl implements UserService {
     /**
      * Возвращает профиль пользователя по идентификатору.
      *
-     * <p>Перед получением выполняется проверка существования аккаунта.</p>
+     * Перед получением выполняется проверка существования аккаунта.
      *
      * @param userId    идентификатор пользователя
      * @param accountId идентификатор аккаунта
@@ -100,23 +155,23 @@ public class UserServiceImpl implements UserService {
         checkAccount(accountId);
         return mapper.toDto(findUserById(userId));
     }
+
     /**
      * Обновляет детальную информацию профиля пользователя.
      *
-     * <p>Перед обновлением выполняется проверка существования аккаунта и проверка,
-     * что указанный профиль пользователя действительно принадлежит этому аккаунту.</p>
+     * Перед обновлением выполняется проверка существования аккаунта и проверка,
+     * что указанный профиль пользователя действительно принадлежит этому аккаунту.
      *
      * Только поля, содержащиеся в {@link UserDetailsDto} (имя, фамилия, дата рождения), будут обновлены.
      * Остальные поля профиля пользователя остаются без изменений.
      *
-     * @param userId идентификатор пользователя
+     * @param userId         идентификатор пользователя
      * @param userDetailsDto DTO с новыми значениями полей профиля
-     * @param accountId идентификатор аккаунта, которому принадлежит пользователь
+     * @param accountId      идентификатор аккаунта, которому принадлежит пользователь
      * @return обновлённый профиль пользователя в формате {@link UserDto}
-     *
      * @throws AccountNotFoundException если аккаунт не существует
-     * @throws UserNotFoundException если пользователь не найден
-     * @throws ValidationException если профиль пользователя не принадлежит указанному аккаунту
+     * @throws UserNotFoundException    если пользователь не найден
+     * @throws ValidationException      если профиль пользователя не принадлежит указанному аккаунту
      */
     public UserDto updateUserDetails(UUID userId, UserDetailsDto userDetailsDto, UUID accountId) {
         log.info("Обновление данных {} для пользователя с id {}", userDetailsDto, userId);
@@ -124,6 +179,33 @@ public class UserServiceImpl implements UserService {
         User user = findUserById(userId);
         checkAccountAndUserProfile(user, accountId);
         mapper.updateUserDetailsFromDto(userDetailsDto, user);
+        log.info("Сохранение обновленного профиля пользователя {}", user);
+        return mapper.toDto(userRepository.save(user));
+    }
+
+    /**
+     * Обновляет контактную информацию пользователя.
+     *
+     * Перед обновлением выполняется проверка существования аккаунта и проверка,
+     * что указанный пользователь принадлежит этому аккаунту.
+     *
+     * Обновляются только поля контактной информации: электронная почта и номер телефона.
+     * Остальные данные пользователя остаются без изменений.
+     *
+     * @param userId          идентификатор пользователя
+     * @param userContactsDto DTO с новыми контактными данными пользователя
+     * @param accountId       идентификатор аккаунта, которому принадлежит пользователь
+     * @return обновлённый профиль пользователя в формате {@link UserDto}
+     * @throws AccountNotFoundException если аккаунт не существует
+     * @throws UserNotFoundException    если пользователь не найден
+     * @throws ValidationException      если профиль пользователя не принадлежит указанному аккаунту
+     */
+    public UserDto updateUserContacts(UUID userId, UserContactsDto userContactsDto, UUID accountId) {
+        log.info("Обновление контактных данных {} для пользователя с id {}", userContactsDto, userId);
+        checkAccount(accountId);
+        User user = findUserById(userId);
+        checkAccountAndUserProfile(user, accountId);
+        mapper.updateUserContactsFromDto(userContactsDto, user);
         log.info("Сохранение обновленного профиля пользователя {}", user);
         return mapper.toDto(userRepository.save(user));
     }
@@ -137,6 +219,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private User findUserById(UUID userId) {
+        log.info("Поиск пользователя ");
         return userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException("Пользователь не найден id" + userId));
     }

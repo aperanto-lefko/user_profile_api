@@ -1,5 +1,6 @@
 package ru.telros.practicum.service;
 
+import ru.telros.practicum.dto.user_service.UserContactsDto;
 import ru.telros.practicum.dto.user_service.UserDetailsDto;
 import ru.telros.practicum.dto.user_service.UserDto;
 
@@ -11,4 +12,7 @@ public interface UserService {
     UserDto createUser(UserDto userDto,UUID accountId);
     void deleteUserById(UUID userId, UUID accountId);
     UserDto updateUserDetails(UUID userId, UserDetailsDto userDetailsDto, UUID accountId);
+    UserDto updateUserContacts(UUID userId, UserContactsDto userContactsDto, UUID accountId);
+    byte[] getPhoto(UUID userId, UUID accountId);
+    void deletePhoto(UUID userId, UUID accountId);
 }
