@@ -78,7 +78,7 @@ public class UserServiceTest {
     void getPhoto_shouldThrow_whenAccountNotFound() {
         Request request = Request.create(
                 Request.HttpMethod.GET,
-                "http://dummy-url",
+                "http://url",
                 Map.of(),
                 null,
                 (Charset) null
@@ -107,7 +107,6 @@ public class UserServiceTest {
     void createUser_shouldCreateUser_whenAccountExists() {
         UserDto userDto = UserDto.builder()
                 .id(userId)
-                .accountId(accountId)
                 .lastName("Ivanov")
                 .firstName("Ivan")
                 .birthDate(null)
@@ -135,7 +134,6 @@ public class UserServiceTest {
     void getUserById_shouldReturnUser_whenAccountExists() {
         UserDto userDto = UserDto.builder()
                 .id(userId)
-                .accountId(accountId)
                 .lastName("Ivanov")
                 .firstName("Ivan")
                 .birthDate(null)
@@ -154,15 +152,19 @@ public class UserServiceTest {
     @Test
     void updateUserDetails_shouldUpdateDetails_whenAccountMatches() {
         UserDetailsDto detailsDto = UserDetailsDto.builder()
-                .id(userId)
+
                 .lastName("Ivanov")
                 .firstName("Ivan")
                 .birthDate(null)
                 .build();
-        User updatedUser = User.builder().id(userId).accountId(accountId).firstName("Ivan").lastName("Ivanov").build();
-        UserDto expectedDto = UserDto.builder()
+        User updatedUser = User.builder()
                 .id(userId)
                 .accountId(accountId)
+                .firstName("Ivan")
+                .lastName("Ivanov")
+                .build();
+        UserDto expectedDto = UserDto.builder()
+                .id(userId)
                 .lastName("Ivanov")
                 .firstName("Ivan")
                 .birthDate(null)

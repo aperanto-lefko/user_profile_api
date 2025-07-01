@@ -9,18 +9,18 @@ import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
-import java.util.UUID;
+
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Builder
 @ToString
 public class UserDetailsDto {
-    UUID id;
+
     @NotBlank
-    @Size(min = 6, max = 254)
+    @Size(min = 2, max = 254)
     String lastName;
     @NotBlank
-    @Size(min = 6, max = 254)
+    @Size(min = 2, max = 254)
     String firstName;
     LocalDate birthDate;
 }

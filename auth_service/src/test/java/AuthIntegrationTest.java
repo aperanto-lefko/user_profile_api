@@ -44,18 +44,16 @@ public class AuthIntegrationTest {
         String login = "testuser_" + System.currentTimeMillis();
         String password = "password";
 
-        RegisterRequest registerRequest = new RegisterRequest(login, password, "Test User");
+        RegisterRequest registerRequest = new RegisterRequest(login, password);
 
         mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(registerRequest)))
                 .andExpect(status().isOk());
 
-        // 2. Проверка сохранения в БД
         Account account = accountRepository.findByLogin(login).orElseThrow();
         assertTrue(passwordEncoder.matches(password, account.getPassword()));
 
-        // 3. Логин
         AuthRequest authRequest = new AuthRequest(login, password);
 
         MvcResult result = mockMvc.perform(post("/api/auth/login")

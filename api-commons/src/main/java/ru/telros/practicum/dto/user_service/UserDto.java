@@ -2,6 +2,7 @@ package ru.telros.practicum.dto.user_service;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -16,12 +17,10 @@ import java.util.UUID;
 public class UserDto {
     UUID id;
     @NotBlank
-    UUID accountId;
-    @NotBlank
-    @Size(min = 6, max = 254)
+    @Size(min = 2, max = 254)
     String lastName;
     @NotBlank
-    @Size(min = 6, max = 254)
+    @Size(min = 2, max = 254)
     String firstName;
     LocalDate birthDate;
     @Email()

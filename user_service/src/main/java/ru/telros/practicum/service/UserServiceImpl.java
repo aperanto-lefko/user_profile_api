@@ -225,7 +225,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private void checkAccountAndUserProfile(User user, UUID accountId) {
-        if (user.getAccountId() != accountId) {
+        if (!user.getAccountId().equals(accountId)) {
             throw new ValidationException(
                     String.format("Номер аккаунта %s не совпадает с номером аккаунта записанным для пользователя %s",
                             accountId, user));

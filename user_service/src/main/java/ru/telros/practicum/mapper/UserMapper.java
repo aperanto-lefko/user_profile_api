@@ -13,6 +13,7 @@ import ru.telros.practicum.entity.User;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
     UserDto toDto(User user);
+    @Mapping(target = "photo", ignore = true)
     User toEntity(UserDto userDto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

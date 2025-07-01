@@ -2,6 +2,8 @@ package ru.telros.practicum.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
@@ -16,7 +18,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Table(name = "user_profile")
+@Table(name = "users")
 @Data
 @Builder
 @NoArgsConstructor
@@ -24,6 +26,7 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     UUID id;
     @Column(nullable = false)
     UUID accountId;
@@ -37,7 +40,8 @@ public class User {
     String email;
     @Column
     String phone;
-    @Lob
+
+    @Column(name = "photo", columnDefinition = "BYTEA")
     byte[]photo;
 
 }
