@@ -8,4 +8,5 @@ import java.util.UUID;
 public interface AccountService {
 
     AccountDto getAccountById(UUID accountId);
+    void deleteAccountById(UUID accountId);
 }

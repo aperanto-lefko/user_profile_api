@@ -22,9 +22,11 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserProfile {
+public class User {
     @Id
     UUID id;
+    @Column(nullable = false)
+    UUID accountId;
     @Column(nullable = false)
     String lastName;
     @Column(nullable = false)

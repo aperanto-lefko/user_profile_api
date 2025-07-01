@@ -47,7 +47,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResponse authenticate(AuthRequest request) {
-        log.info("Attempting to authenticate user: {}", request.getLogin());
+        log.info("Попытка аутентификации пользователя: {}", request.getLogin());
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -58,13 +58,13 @@ public class AuthServiceImpl implements AuthService {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String token = jwtProvider.generateToken(authentication);
-            log.info("Authentication successful for user: {}", request.getLogin());
+            log.info("Аутентификация пользователя прошла успешно: {}", request.getLogin());
             return new AuthResponse(token);
         } catch (AuthenticationException e) {
-            log.error("Authentication failed for user: {}", request.getLogin(), e);
+            log.error("Ошибка аутентификации пользователя: {}", request.getLogin(), e);
             throw new InvalidCredentialsException();
         } catch (Exception e) {
-            log.error("Unexpected error during authentication", e);
+            log.error("Неожиданная ошибка во время аутентификации", e);
             throw new InvalidCredentialsException();
         }
     }

@@ -12,7 +12,12 @@ import java.util.UUID;
 public class AuthServiceFallback implements AuthServiceClient {
     @Override
     public ResponseEntity<AccountDto> getAccount(UUID accountId){
-        log.warn("Активирован резервный вариант для getUser с id: {}", accountId);
+        log.warn("Активирован резервный вариант для getAccount с id: {}", accountId);
+        throw new ServiceUnavailableException("Auth-service недоступен");
+    }
+    @Override
+    public ResponseEntity<Void> deleteAccount(UUID accountId){
+        log.warn("Активирован резервный вариант для deleteAccount с id: {}", accountId);
         throw new ServiceUnavailableException("Auth-service недоступен");
     }
 }
