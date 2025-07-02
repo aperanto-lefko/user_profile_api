@@ -36,7 +36,7 @@ REST API для управления пользовательскими проф
 - **Feign Client**
 - **Docker + Docker Compose**
 - **Аутентификация:** Spring Security + JWT
-- **Тестирование:** JUnit 5, Mockito
+- **Тестирование:** JUnit 5, Mockito, Postman
 - **Сборка:** Maven
 
 ## Системные компоненты
