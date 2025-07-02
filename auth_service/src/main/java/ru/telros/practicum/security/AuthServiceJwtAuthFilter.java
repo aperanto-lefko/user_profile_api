@@ -18,8 +18,8 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class JwtAuthFilter extends OncePerRequestFilter {
-    private final JwtProvider jwtProvider;
+public class AuthServiceJwtAuthFilter extends OncePerRequestFilter {
+    private final AuthServiceJwtProvider jwtProvider;
     private final CustomUserDetailsService userDetailsService;
 
     @Override

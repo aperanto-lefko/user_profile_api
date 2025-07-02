@@ -21,7 +21,7 @@ import ru.telros.practicum.exception.InvalidCredentialsException;
 import ru.telros.practicum.exception.AccountAlreadyExistsException;
 import ru.telros.practicum.mapper.AccountMapper;
 import ru.telros.practicum.repository.AccountRepository;
-import ru.telros.practicum.security.JwtProvider;
+import ru.telros.practicum.security.AuthServiceJwtProvider;
 
 @Service
 @RequiredArgsConstructor
@@ -29,7 +29,7 @@ import ru.telros.practicum.security.JwtProvider;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AuthServiceImpl implements AuthService {
     AuthenticationManager authenticationManager;
-    JwtProvider jwtProvider;
+    AuthServiceJwtProvider jwtProvider;
     AccountRepository accountRepository;
     AccountMapper mapper;
     PasswordEncoder passwordEncoder;

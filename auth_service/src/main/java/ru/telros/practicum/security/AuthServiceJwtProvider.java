@@ -17,7 +17,7 @@ import java.util.UUID;
 
 @Component
 @Slf4j
-public class JwtProvider {
+public class AuthServiceJwtProvider {
     @Value("${jwt.secret}")
     private String secret;
 
