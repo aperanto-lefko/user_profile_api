@@ -59,12 +59,12 @@ REST API для управления пользовательскими проф
    
 ## Docker развертывание
 
-1. Собрать и запустить все сервисы:
+Собрать и запустить все сервисы:
 ```bash
 docker compose build --no-cache && docker compose up
 ```
 
-### Порядок запуска локально
+## Порядок запуска локально
   - Развернуть базы в docker (compose.yaml)
   - DiscoveryServer
   - ConfigServer
