@@ -1,5 +1,6 @@
 package ru.telros.practicum.service;
 
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -9,18 +10,18 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import ru.telros.practicum.dto.auth_service.AccountDto;
 import ru.telros.practicum.dto.auth_service.AuthRequest;
 import ru.telros.practicum.dto.auth_service.AuthResponse;
-import ru.telros.practicum.dto.auth_service.UserDto;
-import ru.telros.practicum.entity.User;
+import ru.telros.practicum.dto.auth_service.RegisterRequest;
+import ru.telros.practicum.entity.Account;
 import ru.telros.practicum.exception.InvalidCredentialsException;
-import ru.telros.practicum.exception.UserNotFoundException;
-import ru.telros.practicum.mapper.UserMapper;
-import ru.telros.practicum.repository.UserRepository;
+import ru.telros.practicum.exception.AccountAlreadyExistsException;
+import ru.telros.practicum.mapper.AccountMapper;
+import ru.telros.practicum.repository.AccountRepository;
 import ru.telros.practicum.security.JwtProvider;
-
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -29,8 +30,9 @@ import java.util.UUID;
 public class AuthServiceImpl implements AuthService {
     AuthenticationManager authenticationManager;
     JwtProvider jwtProvider;
-    UserRepository userRepository;
-    UserMapper mapper;
+    AccountRepository accountRepository;
+    AccountMapper mapper;
+    PasswordEncoder passwordEncoder;
 
     /**
      * Аутентифицирует пользователя по логину и паролю.
@@ -45,7 +47,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResponse authenticate(AuthRequest request) {
-        log.info("Attempting to authenticate user: {}", request.getLogin());
+        log.info("Попытка аутентификации пользователя: {}", request.getLogin());
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -56,28 +58,37 @@ public class AuthServiceImpl implements AuthService {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String token = jwtProvider.generateToken(authentication);
-            log.info("Authentication successful for user: {}", request.getLogin());
+            log.info("Аутентификация пользователя прошла успешно: {}", request.getLogin());
             return new AuthResponse(token);
         } catch (AuthenticationException e) {
-            log.error("Authentication failed for user: {}", request.getLogin(), e);
+            log.error("Ошибка аутентификации пользователя: {}", request.getLogin(), e);
             throw new InvalidCredentialsException();
         } catch (Exception e) {
-            log.error("Unexpected error during authentication", e);
+            log.error("Неожиданная ошибка во время аутентификации", e);
             throw new InvalidCredentialsException();
         }
     }
     /**
-     * Возвращает пользователя по его идентификатору.
+     * Регистрирует нового пользователя.
      * <p>
-     * Если пользователь с указанным ID не найден, выбрасывается исключение {@link UserNotFoundException}.
+     * Проверяет уникальность логина, хеширует пароль и сохраняет пользователя в базу данных.
+     * В случае, если пользователь с таким логином уже существует, выбрасывается исключение {@link AccountAlreadyExistsException}.
      *
-     * @param userId уникальный идентификатор пользователя
-     * @return найденный пользователь
-     * @throws UserNotFoundException если пользователь с таким ID не существует
+     * @param request {@link RegisterRequest} данные для регистрации пользователя
+     * @return сохранённый пользователь
+     * @throws AccountAlreadyExistsException если пользователь с таким логином уже существует
      */
-    public UserDto getUserById(UUID userId) {
-        return userRepository.findById(userId)
-                .map(mapper::toDto)
-                .orElseThrow(() -> new UserNotFoundException(userId));
+    @Transactional
+    public AccountDto register(RegisterRequest request) {
+        if (accountRepository.existsByLogin(request.getLogin())) {
+            throw new AccountAlreadyExistsException(request.getLogin());
+        }
+        String encodedPassword = passwordEncoder.encode(request.getPassword());
+        Account account = Account.builder()
+                .login(request.getLogin())
+                .password(encodedPassword)
+                .build();
+
+        return mapper.toDto(accountRepository.save(account));
     }
 }

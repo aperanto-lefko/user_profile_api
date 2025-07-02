@@ -12,8 +12,8 @@ import ru.telros.practicum.AuthServiceApp;
 import ru.telros.practicum.dto.auth_service.AuthRequest;
 import ru.telros.practicum.dto.auth_service.AuthResponse;
 import ru.telros.practicum.dto.auth_service.RegisterRequest;
-import ru.telros.practicum.entity.User;
-import ru.telros.practicum.repository.UserRepository;
+import ru.telros.practicum.entity.Account;
+import ru.telros.practicum.repository.AccountRepository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -30,7 +30,7 @@ public class AuthIntegrationTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private UserRepository userRepository;
+    private AccountRepository accountRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -44,18 +44,16 @@ public class AuthIntegrationTest {
         String login = "testuser_" + System.currentTimeMillis();
         String password = "password";
 
-        RegisterRequest registerRequest = new RegisterRequest(login, password, "Test User");
+        RegisterRequest registerRequest = new RegisterRequest(login, password);
 
         mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(registerRequest)))
                 .andExpect(status().isOk());
 
-        // 2. Проверка сохранения в БД
-        User user = userRepository.findByLogin(login).orElseThrow();
-        assertTrue(passwordEncoder.matches(password, user.getPassword()));
+        Account account = accountRepository.findByLogin(login).orElseThrow();
+        assertTrue(passwordEncoder.matches(password, account.getPassword()));
 
-        // 3. Логин
         AuthRequest authRequest = new AuthRequest(login, password);
 
         MvcResult result = mockMvc.perform(post("/api/auth/login")

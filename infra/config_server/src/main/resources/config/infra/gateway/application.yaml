@@ -4,10 +4,19 @@ spring:
       discovery.locator.enabled: true # автообнаружение сервисов
       routes:
 
-        - id: auth-service
+        - id: auth-service-api
           uri: lb://auth-service
           predicates:
-              - Path=/api/auth/**
+            - Path=/api/auth/**
+
+        - id: auth-service-internal
+          uri: lb://auth-service
+          predicates:
+            - Path=/internal/auth/**
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/**
 
 
 server:

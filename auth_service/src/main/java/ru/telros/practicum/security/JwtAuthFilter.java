@@ -36,10 +36,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
 
         String jwt = authHeader.substring(7);
-        log.debug("JWT Token extracted: {}", jwt);
+        log.debug("JWT Token получен: {}", jwt);
         if (jwtProvider.validateToken(jwt)) {
             String username = jwtProvider.getUsernameFromToken(jwt);
-            log.debug("JWT token is valid, Username: {}", username);
+            log.debug("JWT token валидный, имя пользователя: {}", username);
             var userDetails = userDetailsService.loadUserByUsername(username);
 
             var authToken = new UsernamePasswordAuthenticationToken(
@@ -51,7 +51,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authToken);
 
         } else {
-            log.debug("Invalid JWT Token");
+            log.debug("Некорректный JWT Token");
         }
         filterChain.doFilter(request, response);
     }

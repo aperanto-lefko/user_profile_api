@@ -54,15 +54,15 @@ public class JwtProvider {
             return true;
         } catch (io.jsonwebtoken.ExpiredJwtException e) {
 
-            log.error("JWT token is expired: {}", token, e);
+            log.error("Срок действия токена JWT истек: {}", token, e);
         } catch (io.jsonwebtoken.MalformedJwtException e) {
 
-            log.error("JWT token is malformed: {}", token, e);
+            log.error("Токен JWT имеет неправильный формат: {}", token, e);
         } catch (io.jsonwebtoken.SignatureException e) {
 
-            log.error("JWT signature is invalid: {}", token, e);
+            log.error("Подпись JWT недействительна: {}", token, e);
         } catch (Exception e) {
-            log.error("Invalid JWT token: {}", token, e);
+            log.error("Недействительный токен JWT: {}", token, e);
         }
         return false;
     }

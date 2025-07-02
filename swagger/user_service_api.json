@@ -1,0 +1,226 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "User Service API",
+    "version": "1.0.0",
+    "description": "API для управления профилями пользователей."
+  },
+  "servers": [
+    {
+      "url": "/api/users"
+    }
+  ],
+  "components": {
+    "parameters": {
+      "AccountIdHeader": {
+        "in": "header",
+        "name": "X-Account-Id",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": "Идентификатор аккаунта пользователя."
+      }
+    },
+    "schemas": {
+      "UserDto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "format": "uuid" },
+          "accountId": { "type": "string", "format": "uuid" },
+          "lastName": { "type": "string" },
+          "firstName": { "type": "string" },
+          "birthDate": { "type": "string", "format": "date" },
+          "email": { "type": "string" },
+          "phone": { "type": "string" }
+        }
+      },
+      "UserDetailsDto": {
+        "type": "object",
+        "properties": {
+          "lastName": { "type": "string" },
+          "firstName": { "type": "string" },
+          "birthDate": { "type": "string", "format": "date" }
+        }
+      },
+      "UserContactsDto": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" },
+          "phone": { "type": "string" }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/": {
+      "post": {
+        "summary": "Создать пользователя",
+        "parameters": [
+          { "$ref": "#/components/parameters/AccountIdHeader" }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UserDto" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Пользователь создан",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserDto" }
+              }
+            }
+          },
+          "400": { "description": "Ошибка валидации" }
+        }
+      }
+    },
+    "/{userId}": {
+      "get": {
+        "summary": "Получить данные пользователя",
+        "parameters": [
+          { "$ref": "#/components/parameters/AccountIdHeader" },
+          { "name": "userId", "in": "path", "required": true, "schema": { "type": "string", "format": "uuid" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Профиль пользователя",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserDto" }
+              }
+            }
+          },
+          "404": { "description": "Пользователь не найден" }
+        }
+      },
+      "delete": {
+        "summary": "Удалить пользователя",
+        "parameters": [
+          { "$ref": "#/components/parameters/AccountIdHeader" },
+          { "name": "userId", "in": "path", "required": true, "schema": { "type": "string", "format": "uuid" } }
+        ],
+        "responses": {
+          "204": { "description": "Пользователь удалён" },
+          "404": { "description": "Пользователь не найден" }
+        }
+      }
+    },
+    "/{userId}/details": {
+      "patch": {
+        "summary": "Обновить основные данные пользователя",
+        "parameters": [
+          { "$ref": "#/components/parameters/AccountIdHeader" },
+          { "name": "userId", "in": "path", "required": true, "schema": { "type": "string", "format": "uuid" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UserDetailsDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Профиль обновлён",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserDto" }
+              }
+            }
+          },
+          "404": { "description": "Пользователь не найден" }
+        }
+      }
+    },
+    "/{userId}/contacts": {
+      "patch": {
+        "summary": "Обновить контактные данные пользователя",
+        "parameters": [
+          { "$ref": "#/components/parameters/AccountIdHeader" },
+          { "name": "userId", "in": "path", "required": true, "schema": { "type": "string", "format": "uuid" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UserContactsDto" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Профиль обновлён",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserDto" }
+              }
+            }
+          },
+          "404": { "description": "Пользователь не найден" }
+        }
+      }
+    },
+    "/{userId}/photo": {
+      "post": {
+        "summary": "Загрузить или обновить фотографию пользователя",
+        "parameters": [
+          { "name": "userId", "in": "path", "required": true, "schema": { "type": "string", "format": "uuid" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": { "type": "string", "format": "binary" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Фотография загружена" },
+          "400": { "description": "Ошибка загрузки файла" }
+        }
+      },
+      "get": {
+        "summary": "Получить фотографию пользователя",
+        "parameters": [
+          { "$ref": "#/components/parameters/AccountIdHeader" },
+          { "name": "userId", "in": "path", "required": true, "schema": { "type": "string", "format": "uuid" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Фотография пользователя",
+            "content": {
+              "image/jpeg": {
+                "schema": { "type": "string", "format": "binary" }
+              }
+            }
+          },
+          "404": { "description": "Фотография не найдена" }
+        }
+      },
+      "delete": {
+        "summary": "Удалить фотографию пользователя",
+        "parameters": [
+          { "$ref": "#/components/parameters/AccountIdHeader" },
+          { "name": "userId", "in": "path", "required": true, "schema": { "type": "string", "format": "uuid" } }
+        ],
+        "responses": {
+          "204": { "description": "Фотография удалена" },
+          "404": { "description": "Фотография не найдена" }
+        }
+      }
+    }
+  }
+}

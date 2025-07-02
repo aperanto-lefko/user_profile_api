@@ -2,13 +2,12 @@ package ru.telros.practicum.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import ru.telros.practicum.dto.auth_service.UserDto;
-import ru.telros.practicum.entity.User;
+import ru.telros.practicum.dto.auth_service.AccountDto;
+import ru.telros.practicum.entity.Account;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper {
+public interface AccountMapper {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "login", target = "login")
-    @Mapping(source = "name", target = "name")
-    UserDto toDto(User user);
+    AccountDto toDto(Account account);
 }

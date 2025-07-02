@@ -6,10 +6,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -18,24 +20,22 @@ import java.util.Collections;
 import java.util.UUID;
 
 @Entity
-@Table(name = "users")
+@Table(name = "accounts")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements UserDetails {
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class Account implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    UUID id;
 
     @Column(unique = true, nullable = false)
-    private String login;
+    String login;
 
     @Column(nullable = false)
-    private String password;
-
-    @Column(nullable = false)
-    private String name;
+    String password;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

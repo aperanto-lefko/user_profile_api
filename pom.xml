@@ -10,10 +10,10 @@
     <packaging>pom</packaging>
     <modules>
         <module>auth_service</module>
-
         <module>infra</module>
         <module>api-commons</module>
-          </modules>
+        <module>user_service</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
