@@ -1,0 +1,2167 @@
+{
+	"info": {
+		"_postman_id": "4f0a6c9e-f55a-4988-b4b4-33d04390d5d0",
+		"name": "UserProfilApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37900170"
+	},
+	"item": [
+		{
+			"name": "Cамостоятельное тестирование",
+			"item": [
+				{
+					"name": "user_service",
+					"item": [
+						{
+							"name": "Create User",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Account-Id",
+										"value": "1ed7218e-cd06-4675-8970-071617a6d8ce",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \r\n  \r\n  \"lastName\": \"Ivanov\",\r\n  \"firstName\": \"Ivan\",\r\n  \"birthDate\": \"1990-05-15\",\r\n  \"email\": \"ivanov@example.com\",\r\n  \"phone\": \"+1234567890\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update user contacts",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-Account-Id",
+										"value": "1ed7218e-cd06-4675-8970-071617a6d8ce",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \r\n \r\n  \"email\": \"sidiriv@example.com\",\r\n  \"phone\": \"+1234567890\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/users/9e6a4a6e-2ced-403d-bfc3-28e2febe9816/contacts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"9e6a4a6e-2ced-403d-bfc3-28e2febe9816",
+										"contacts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Upload Photo",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Account-Id",
+										"value": "1ed7218e-cd06-4675-8970-071617a6d8ce",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "",
+											"type": "file",
+											"src": "/C:/Users/Lisenok/Desktop/Фото для резюме/2025-07-01_22-45-24.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/users/9e6a4a6e-2ced-403d-bfc3-28e2febe9816/photo",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"9e6a4a6e-2ced-403d-bfc3-28e2febe9816",
+										"photo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Photo",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Account-Id",
+										"value": "1ed7218e-cd06-4675-8970-071617a6d8ce",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "",
+											"type": "file",
+											"src": [],
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/users/9e6a4a6e-2ced-403d-bfc3-28e2febe9816/photo",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"9e6a4a6e-2ced-403d-bfc3-28e2febe9816",
+										"photo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update User details",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-Account-Id",
+										"value": "1ed7218e-cd06-4675-8970-071617a6d8ce",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \r\n  \r\n  \"lastName\": \"Petrov\",\r\n  \"firstName\": \"Sidor\",\r\n  \"birthDate\": \"1990-05-15\"\r\n  \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/users/9e6a4a6e-2ced-403d-bfc3-28e2febe9816/details",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"9e6a4a6e-2ced-403d-bfc3-28e2febe9816",
+										"details"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get User by id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Account-Id",
+										"value": "1ed7218e-cd06-4675-8970-071617a6d8ce",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/users/9e6a4a6e-2ced-403d-bfc3-28e2febe9816",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"users",
+										"9e6a4a6e-2ced-403d-bfc3-28e2febe9816"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "auth_service",
+					"item": [
+						{
+							"name": "Account_register",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Получаем функцию по другому имени\r",
+											"//const userGenerator = eval(pm.collectionVariables.get(\"generateRandomUserFunc\"));\r",
+											"\r",
+											"// Генерируем и сохраняем\r",
+											"//const randomUser = userGenerator();\r",
+											"//pm.variables.set(\"randomUser\", randomUser);\r",
+											"//console.log(\"Generated user:\", randomUser);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Проверка успешной регистрации\r",
+											"//pm.test(\"User registered successfully\", function() {\r",
+											"   // pm.response.to.have.status(200);\r",
+											"    \r",
+											"   // const response = pm.response.json();\r",
+											"   // pm.expect(response.login).to.eql(pm.variables.get(\"randomUser\").login);\r",
+											"   // pm.expect(response.name).to.eql(pm.variables.get(\"randomUser\").name);\r",
+											"   // pm.expect(response.id).to.be.a('string');\r",
+											"    \r",
+											"    // Сохраняем ID для последующих тестов\r",
+											"   // pm.environment.set(\"registeredUserId\", response.id);\r",
+											"//});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"login\": \"Login1\",\r\n  \"password\": \"password1\"\r\n  \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAccountById",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"login\": \"wertdf\",\r\n  \"password\": \"saffbgf\",\r\n  \"name\": \"SDFbg\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/internal/auth/account/1ed7218e-cd06-4675-8970-071617a6d8ce",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"internal",
+										"auth",
+										"account",
+										"1ed7218e-cd06-4675-8970-071617a6d8ce"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PostToken",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"login\": \"Login\",\r\n  \"password\": \"password\"\r\n  \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/auth/token",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"auth",
+										"token"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Автотестирование",
+			"item": [
+				{
+					"name": "auth_service",
+					"item": [
+						{
+							"name": "Account_register_auto",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"class API {\r",
+											"    constructor(postman, verbose = false, baseUrl = \"http://localhost:8080\") {\r",
+											"        this.baseUrl = baseUrl;\r",
+											"        this.pm = postman;\r",
+											"        this._verbose = verbose;\r",
+											"    }\r",
+											"\r",
+											"    async register(user, verbose=null) {\r",
+											"        return this.sendRequest(\"POST\", \"/api/auth/register\", user, \"Ошибка при регистрации аккаунта: \", verbose);\r",
+											"    }\r",
+											"\r",
+											"  \r",
+											"    async sendRequest(method, path, body=null, errorText = \"Ошибка при выполнении запроса: \", verbose=null) {\r",
+											"        return new Promise((resolve, reject) => {\r",
+											"            verbose = verbose == null ? this._verbose : verbose;\r",
+											"            const request = {\r",
+											"                url: this.baseUrl + path,\r",
+											"                method: method,\r",
+											"                body: {\r",
+											"                    mode: 'raw',\r",
+											"                    raw: JSON.stringify(body),\r",
+											"                    options: { raw: { language: 'json' } }\r",
+											"                },\r",
+											"                header: { \"Content-Type\": \"application/json\" },\r",
+											"            };\r",
+											"            if(verbose) {\r",
+											"                console.log(\"Отправляю запрос: \", request);\r",
+											"            }\r",
+											"\r",
+											"            try {\r",
+											"                this.pm.sendRequest(request, (error, response) => {\r",
+											"                    if(error || (response.code >= 400 && response.code <= 599)) {\r",
+											"                        let err = error ? error : JSON.stringify(response.json());\r",
+											"                        console.error(\"Ошибка при выполнении запроса:\\n\", err,\r",
+											"                             \"\\nДанные запроса:\\n\", JSON.stringify(request));\r",
+											"                        reject(new Error(errorText + err));\r",
+											"                        return;\r",
+											"                    }\r",
+											"                    if(verbose) {\r",
+											"                        console.log(\"Результат: код - \", response.code, \", тело: \", response.json());\r",
+											"                    }\r",
+											"                    if (!response.json()) {\r",
+											"                        reject(new Error('Пустое тело ответа'));\r",
+											"                    } else {\r",
+											"                        resolve(response.json());\r",
+											"                    }\r",
+											"                });\r",
+											"            } catch(err) {\r",
+											"                if(verbose) {\r",
+											"                    console.error(errorText, err);\r",
+											"                }\r",
+											"                reject(err);\r",
+											"            }\r",
+											"        });\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"class RandomUtils {\r",
+											"    getRegisterRequest() {\r",
+											"        return {\r",
+											"            login: pm.variables.replaceIn('user{{$randomInt}}@example.com'),\r",
+											"            password: pm.variables.replaceIn('pass{{$randomInt}}')\r",
+											"        };\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"\r",
+											"const main = async () => {\r",
+											"    const api = new API(pm);\r",
+											"    const rnd = new RandomUtils();\r",
+											"\r",
+											"    let registerRequest;\r",
+											"    try {\r",
+											"        registerRequest = rnd.getRegisterRequest();\r",
+											"    } catch(err) {\r",
+											"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											" \r",
+											"    pm.request.body.update({\r",
+											"        mode: 'raw',\r",
+											"        raw: JSON.stringify(registerRequest),\r",
+											"        options: { raw: { language: 'json' } }\r",
+											"    });\r",
+											"};\r",
+											"\r",
+											"\r",
+											"const interval = setInterval(() => {}, 1000);\r",
+											"\r",
+											"setTimeout(async () => {\r",
+											"    try {\r",
+											"        await main();\r",
+											"    } catch (e) {\r",
+											"        console.error(e);\r",
+											"    } finally {\r",
+											"        clearInterval(interval);\r",
+											"    }\r",
+											"}, 100);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Ответ на регистрацию должен содержать код статуса 200 и данные в формате json\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.response.to.be.withBody;\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"const registerRequest = JSON.parse(pm.request.body.raw);\r",
+											"const registerResponse = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Ответ регистрации должен содержать поля аккаунта login, id \", function () {\r",
+											"    pm.expect(registerResponse).to.have.property('login');\r",
+											"    pm.expect(registerResponse).to.have.property('id');\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Логин в ответе должен соответствовать логину в запросе\", function () {\r",
+											"    pm.expect(registerRequest.login).equal(registerResponse.login, 'Логин должен соответствовать отправленному в запросе');\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{request_body}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/register",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PostToken_auto",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"class API {\r",
+											"    constructor(postman, verbose = false, baseUrl = \"http://localhost:8080\") {\r",
+											"        this.baseUrl = baseUrl;\r",
+											"        this.pm = postman;\r",
+											"        this._verbose = verbose;\r",
+											"    }\r",
+											"\r",
+											"    async register(user, verbose=null) {\r",
+											"        return this.sendRequest(\"POST\", \"/api/auth/register\", user, \"Ошибка при регистрации пользователя: \", verbose);\r",
+											"    }\r",
+											"\r",
+											"    async authenticate(authRequest, verbose=null) {\r",
+											"        return this.sendRequest(\"POST\", \"/api/auth/token\", authRequest, \"Ошибка при аутентификации пользователя: \", verbose);\r",
+											"    }\r",
+											"\r",
+											"    async sendRequest(method, path, body=null, errorText = \"Ошибка при выполнении запроса: \", verbose=null) {\r",
+											"        return new Promise((resolve, reject) => {\r",
+											"            verbose = verbose == null ? this._verbose : verbose;\r",
+											"            const request = {\r",
+											"                url: this.baseUrl + path,\r",
+											"                method: method,\r",
+											"                body: {\r",
+											"                    mode: 'raw',\r",
+											"                    raw: JSON.stringify(body),\r",
+											"                    options: { raw: { language: 'json' } }\r",
+											"                },\r",
+											"                header: { \"Content-Type\": \"application/json\" },\r",
+											"            };\r",
+											"            if(verbose) {\r",
+											"                console.log(\"Отправляю запрос: \", request);\r",
+											"            }\r",
+											"\r",
+											"            try {\r",
+											"                this.pm.sendRequest(request, (error, response) => {\r",
+											"                    if(error || (response.code >= 400 && response.code <= 599)) {\r",
+											"                        let err = error ? error : JSON.stringify(response.json());\r",
+											"                        console.error(\"Ошибка при выполнении запроса:\\n\", err,\r",
+											"                             \"\\nДанные запроса:\\n\", JSON.stringify(request));\r",
+											"                        reject(new Error(errorText + err));\r",
+											"                        return;\r",
+											"                    }\r",
+											"                    if(verbose) {\r",
+											"                        console.log(\"Результат: код - \", response.code, \", тело: \", response.json());\r",
+											"                    }\r",
+											"                    if (!response.json()) {\r",
+											"                        reject(new Error('Пустое тело ответа'));\r",
+											"                    } else {\r",
+											"                        resolve(response.json());\r",
+											"                    }\r",
+											"                });\r",
+											"            } catch(err) {\r",
+											"                if(verbose) {\r",
+											"                    console.error(errorText, err);\r",
+											"                }\r",
+											"                reject(err);\r",
+											"            }\r",
+											"        });\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"class RandomUtils {\r",
+											"    getRegisterRequest() {\r",
+											"        return {\r",
+											"            login: pm.variables.replaceIn('user{{$randomInt}}@example.com'),\r",
+											"            password: pm.variables.replaceIn('pass{{$randomInt}}')\r",
+											"        };\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"\r",
+											"const main = async () => {\r",
+											"    const api = new API(pm, true);\r",
+											"    const rnd = new RandomUtils();\r",
+											"\r",
+											"    let credentials;\r",
+											"    try {\r",
+											"        credentials = rnd.getRegisterRequest();\r",
+											"    } catch(err) {\r",
+											"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    let registerResponse;\r",
+											"    try {\r",
+											"        registerResponse = await api.register(credentials, true);\r",
+											"        console.log(\"Регистрация успешна:\", registerResponse);\r",
+											"    } catch(err) {\r",
+											"        console.error(\"Ошибка регистрации:\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    let authResponse;\r",
+											"    try {\r",
+											"        authResponse = await api.authenticate(credentials, true);\r",
+											"        console.log(\"Аутентификация успешна, токен получен:\", authResponse);\r",
+											"    } catch(err) {\r",
+											"        console.error(\"Ошибка аутентификации:\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    pm.request.body.update({\r",
+											"        mode: 'raw',\r",
+											"        raw: JSON.stringify(credentials),\r",
+											"        options: { raw: { language: 'json' } }\r",
+											"    });\r",
+											"};\r",
+											"\r",
+											"const interval = setInterval(() => {}, 1000);\r",
+											"\r",
+											"setTimeout(async () => {\r",
+											"    try {\r",
+											"        await main();\r",
+											"    } catch (e) {\r",
+											"        console.error(e);\r",
+											"    } finally {\r",
+											"        clearInterval(interval);\r",
+											"    }\r",
+											"}, 100);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Ответ должен иметь статус 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Ответ должен быть JSON\", () => {\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Ответ должен содержать поле token\", () => {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData).to.have.property('token');\r",
+											"    pm.expect(jsonData.token).to.be.a('string').that.is.not.empty;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/token",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Account By Id_auto",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"class API {\r",
+											"    constructor(pm, verbose = false, baseUrl = \"http://localhost:8080\") {\r",
+											"        this.baseUrl = baseUrl;\r",
+											"        this.pm = pm;\r",
+											"        this._verbose = verbose;\r",
+											"    }\r",
+											"\r",
+											"    async register(user, verbose=null) {\r",
+											"        return this.sendRequest(\"POST\", \"/api/auth/register\", user, \"Ошибка при регистрации аккаунта: \", verbose);\r",
+											"    }\r",
+											"\r",
+											"    async getAccount(accountId, verbose=null) {\r",
+											"        return this.sendRequest(\"GET\", `/internal/auth/account/${accountId}`, null, \"Ошибка при получении аккаунта: \", verbose);\r",
+											"    }\r",
+											"\r",
+											"    async sendRequest(method, path, body=null, errorText = \"Ошибка при выполнении запроса: \", verbose=null) {\r",
+											"        return new Promise((resolve, reject) => {\r",
+											"            verbose = verbose == null ? this._verbose : verbose;\r",
+											"            const request = {\r",
+											"                url: this.baseUrl + path,\r",
+											"                method: method,\r",
+											"                header: { \"Content-Type\": \"application/json\" }\r",
+											"            };\r",
+											"            if (method !== \"GET\" && body !== null) {\r",
+											"                request.body = {\r",
+											"                    mode: 'raw',\r",
+											"                    raw: JSON.stringify(body),\r",
+											"                    options: { raw: { language: 'json' } }\r",
+											"                };\r",
+											"            }\r",
+											"\r",
+											"            if(verbose) {\r",
+											"                console.log(\"Отправляю запрос: \", request);\r",
+											"            }\r",
+											"\r",
+											"            try {\r",
+											"                this.pm.sendRequest(request, (error, response) => {\r",
+											"                    if(error || (response.code >= 400 && response.code <= 599)) {\r",
+											"                        let err = error ? error : JSON.stringify(response.json());\r",
+											"                        console.error(\"Ошибка при выполнении запроса:\\n\", err,\r",
+											"                             \"\\nДанные запроса:\\n\", JSON.stringify(request));\r",
+											"                        reject(new Error(errorText + err));\r",
+											"                        return;\r",
+											"                    }\r",
+											"                    if(verbose) {\r",
+											"                        console.log(\"Результат: код - \", response.code, \", тело: \", response.json());\r",
+											"                    }\r",
+											"                    if (!response.json()) {\r",
+											"                        reject(new Error('Пустое тело ответа'));\r",
+											"                    } else {\r",
+											"                        resolve(response.json());\r",
+											"                    }\r",
+											"                });\r",
+											"            } catch(err) {\r",
+											"                if(verbose) {\r",
+											"                    console.error(errorText, err);\r",
+											"                }\r",
+											"                reject(err);\r",
+											"            }\r",
+											"        });\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"class RandomUtils {\r",
+											"    getRegisterRequest() {\r",
+											"        return {\r",
+											"            login: pm.variables.replaceIn('user{{$randomInt}}@example.com'),\r",
+											"            password: pm.variables.replaceIn('pass{{$randomInt}}')\r",
+											"        };\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"const main = async () => {\r",
+											"    const api = new API(pm, true);\r",
+											"    const rnd = new RandomUtils();\r",
+											"\r",
+											"    let registerRequest;\r",
+											"    try {\r",
+											"        registerRequest = rnd.getRegisterRequest();\r",
+											"    } catch(err) {\r",
+											"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"pm.environment.set(\"accountLogin\", registerRequest.login);\r",
+											"pm.environment.set(\"accountPassword\", registerRequest.password);\r",
+											"    // 1. Регистрация\r",
+											"    let registerResponse;\r",
+											"    try {\r",
+											"        registerResponse = await api.register(registerRequest, true);\r",
+											"        console.log(\"Регистрация успешна\", registerResponse);\r",
+											"    } catch(err) {\r",
+											"        console.error(\"Ошибка регистрации\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    const accountId = registerResponse.id;\r",
+											"    \r",
+											"    if (!accountId) {\r",
+											"        console.error(\"В ответе регистрации нет поля id\");\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    pm.environment.set(\"accountId\", accountId);\r",
+											"\r",
+											"};\r",
+											"\r",
+											"const interval = setInterval(() => {}, 1000);\r",
+											"\r",
+											"setTimeout(async () => {\r",
+											"    try {\r",
+											"        await main();\r",
+											"    } catch(e) {\r",
+											"        console.error(e);\r",
+											"    } finally {\r",
+											"        clearInterval(interval);\r",
+											"    }\r",
+											"}, 100);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"pm.test(\"Ответ должен иметь статус 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Ответ должен быть JSON\", () => {\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Ответ должен содержать id и login\", () => {\r",
+											"    const account = pm.response.json();\r",
+											"\r",
+											"    pm.expect(account).to.have.property('id');\r",
+											"    pm.expect(account).to.have.property('login');\r",
+											"\r",
+											"});\r",
+											"pm.test(\"accountId должен совпадать с запросом \", () => {\r",
+											"   const account = pm.response.json();\r",
+											"    pm.expect(account.id).to.eql(pm.environment.get(\"accountId\"));\r",
+											"});\r",
+											"pm.test(\"accountLogin должен совпадать с запросом \", () => {\r",
+											"     const account = pm.response.json();\r",
+											"    pm.expect(account.login).to.eql(pm.environment.get(\"accountLogin\"));\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Ответ не должен содержать поле password\", () => {\r",
+											"    const account = pm.response.json();\r",
+											"    pm.expect(account).to.not.have.property('password');\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{request_body}}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/internal/auth/account/{{accountId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"internal",
+										"auth",
+										"account",
+										"{{accountId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Account_auto",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"class API {\r",
+											"    constructor(pm, verbose = false, baseUrl = \"http://localhost:8080\") {\r",
+											"        this.baseUrl = baseUrl;\r",
+											"        this.pm = pm;\r",
+											"        this._verbose = verbose;\r",
+											"    }\r",
+											"\r",
+											"    async register(user, verbose = null) {\r",
+											"        return this.sendRequest(\"POST\", \"/api/auth/register\", user, \"Ошибка при регистрации аккаунта: \", verbose);\r",
+											"    }\r",
+											"\r",
+											"    async sendRequest(method, path, body = null, errorText = \"Ошибка при выполнении запроса: \", verbose = null) {\r",
+											"        return new Promise((resolve, reject) => {\r",
+											"            verbose = verbose == null ? this._verbose : verbose;\r",
+											"            const request = {\r",
+											"                url: this.baseUrl + path,\r",
+											"                method: method,\r",
+											"                header: { \"Content-Type\": \"application/json\" }\r",
+											"            };\r",
+											"            if (method !== \"GET\" && body !== null) {\r",
+											"                request.body = {\r",
+											"                    mode: 'raw',\r",
+											"                    raw: JSON.stringify(body),\r",
+											"                    options: { raw: { language: 'json' } }\r",
+											"                };\r",
+											"            }\r",
+											"\r",
+											"            if (verbose) {\r",
+											"                console.log(\"Отправляю запрос: \", request);\r",
+											"            }\r",
+											"\r",
+											"            try {\r",
+											"                this.pm.sendRequest(request, (error, response) => {\r",
+											"                    if (error || (response.code >= 400 && response.code <= 599)) {\r",
+											"                        let err = error ? error : JSON.stringify(response.json());\r",
+											"                        console.error(\"Ошибка при выполнении запроса:\\n\", err,\r",
+											"                            \"\\nДанные запроса:\\n\", JSON.stringify(request));\r",
+											"                        reject(new Error(errorText + err));\r",
+											"                        return;\r",
+											"                    }\r",
+											"                    if (verbose) {\r",
+											"                        console.log(\"Результат: код - \", response.code, \", тело: \", response.json());\r",
+											"                    }\r",
+											"                    if (!response.json()) {\r",
+											"                        reject(new Error('Пустое тело ответа'));\r",
+											"                    } else {\r",
+											"                        resolve(response.json());\r",
+											"                    }\r",
+											"                });\r",
+											"            } catch (err) {\r",
+											"                if (verbose) {\r",
+											"                    console.error(errorText, err);\r",
+											"                }\r",
+											"                reject(err);\r",
+											"            }\r",
+											"        });\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"class RandomUtils {\r",
+											"    getRegisterRequest() {\r",
+											"        return {\r",
+											"            login: pm.variables.replaceIn('user{{$randomInt}}@example.com'),\r",
+											"            password: pm.variables.replaceIn('pass{{$randomInt}}')\r",
+											"        };\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"const main = async () => {\r",
+											"    const api = new API(pm, true);\r",
+											"    const rnd = new RandomUtils();\r",
+											"\r",
+											"    let registerRequest;\r",
+											"    try {\r",
+											"        registerRequest = rnd.getRegisterRequest();\r",
+											"    } catch (err) {\r",
+											"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    pm.environment.set(\"accountLogin\", registerRequest.login);\r",
+											"    pm.environment.set(\"accountPassword\", registerRequest.password);\r",
+											"\r",
+											"    let registerResponse;\r",
+											"    try {\r",
+											"        registerResponse = await api.register(registerRequest, true);\r",
+											"        console.log(\"Регистрация успешна\", registerResponse);\r",
+											"    } catch (err) {\r",
+											"        console.error(\"Ошибка регистрации\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    const accountId = registerResponse.id;\r",
+											"    if (!accountId) {\r",
+											"        console.error(\"В ответе регистрации нет поля id\");\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    pm.environment.set(\"accountId\", accountId);\r",
+											"\r",
+											"};\r",
+											"\r",
+											"const interval = setInterval(() => {}, 1000);\r",
+											"\r",
+											"setTimeout(async () => {\r",
+											"    try {\r",
+											"        await main();\r",
+											"    } catch (e) {\r",
+											"        console.error(e);\r",
+											"    } finally {\r",
+											"        clearInterval(interval);\r",
+											"    }\r",
+											"}, 100);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Статус ответа должен быть 200 (OK)\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Тело ответа должно быть пустым\", () => {\r",
+											"    pm.expect(pm.response.text()).to.be.empty;\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{request_body}}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/internal/auth/account/{{accountId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"internal",
+										"auth",
+										"account",
+										"{{accountId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "user_service",
+					"item": [
+						{
+							"name": "Create User_auto",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"class API {\r",
+											"    constructor(pm, verbose = false, baseUrl = \"http://localhost:8080\") {\r",
+											"        this.baseUrl = baseUrl;\r",
+											"        this.pm = pm;\r",
+											"        this._verbose = verbose;\r",
+											"    }\r",
+											"\r",
+											"    async register(user, verbose = null) {\r",
+											"        return this.sendRequest(\"POST\", \"/api/auth/register\", user, \"Ошибка при регистрации аккаунта: \", verbose);\r",
+											"    }\r",
+											"\r",
+											"   \r",
+											"    async sendRequest(method, path, body = null, errorText = \"Ошибка при выполнении запроса: \", verbose = null, headers = {}) {\r",
+											"        return new Promise((resolve, reject) => {\r",
+											"            verbose = verbose == null ? this._verbose : verbose;\r",
+											"            const request = {\r",
+											"                url: this.baseUrl + path,\r",
+											"                method: method,\r",
+											"                header: Object.assign(\r",
+											"                    { \"Content-Type\": \"application/json\" },\r",
+											"                    headers\r",
+											"                )\r",
+											"            };\r",
+											"            if (method !== \"GET\" && body !== null) {\r",
+											"                request.body = {\r",
+											"                    mode: \"raw\",\r",
+											"                    raw: JSON.stringify(body),\r",
+											"                    options: { raw: { language: \"json\" } },\r",
+											"                };\r",
+											"            }\r",
+											"\r",
+											"            if (verbose) {\r",
+											"                console.log(\"Отправляю запрос: \", request);\r",
+											"            }\r",
+											"\r",
+											"            try {\r",
+											"                this.pm.sendRequest(request, (error, response) => {\r",
+											"                    if (error || (response.code >= 400 && response.code <= 599)) {\r",
+											"                        let err = error ? error : JSON.stringify(response.json());\r",
+											"                        console.error(\"Ошибка при выполнении запроса:\\n\", err, \"\\nДанные запроса:\\n\", JSON.stringify(request));\r",
+											"                        reject(new Error(errorText + err));\r",
+											"                        return;\r",
+											"                    }\r",
+											"                    if (verbose) {\r",
+											"                        console.log(\"Результат: код - \", response.code, \", тело: \", response.json());\r",
+											"                    }\r",
+											"                    if (!response.json()) {\r",
+											"                        reject(new Error(\"Пустое тело ответа\"));\r",
+											"                    } else {\r",
+											"                        resolve(response.json());\r",
+											"                    }\r",
+											"                });\r",
+											"            } catch (err) {\r",
+											"                if (verbose) {\r",
+											"                    console.error(errorText, err);\r",
+											"                }\r",
+											"                reject(err);\r",
+											"            }\r",
+											"        });\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"class RandomUtils {\r",
+											"    getRegisterRequest() {\r",
+											"        return {\r",
+											"            login: pm.variables.replaceIn(\"user{{$randomInt}}@example.com\"),\r",
+											"            password: pm.variables.replaceIn(\"pass{{$randomInt}}\"),\r",
+											"        };\r",
+											"    }\r",
+											"\r",
+											"  getUserDto() {\r",
+											"    const year = 1970 + Math.floor(Math.random() * 30); \r",
+											"    return {\r",
+											"        \r",
+											"        lastName: pm.variables.replaceIn('{{$randomLastName}}'),\r",
+											"        firstName: pm.variables.replaceIn('{{$randomFirstName}}'),\r",
+											"        birthDate: `${year}-01-01`, \r",
+											"        email: pm.variables.replaceIn('{{$randomEmail}}'),\r",
+											"        phone: pm.variables.replaceIn('{{$randomPhoneNumber}}')\r",
+											"    };\r",
+											"}\r",
+											"}\r",
+											"\r",
+											"const main = async () => {\r",
+											"    const api = new API(pm, true);\r",
+											"    const rnd = new RandomUtils();\r",
+											"\r",
+											"    let registerRequest;\r",
+											"    try {\r",
+											"        registerRequest = rnd.getRegisterRequest();\r",
+											"    } catch (err) {\r",
+											"        console.error(\"Ошибка при подготовке данных для регистрации\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    let registerResponse;\r",
+											"    try {\r",
+											"        registerResponse = await api.register(registerRequest, true);\r",
+											"    } catch (err) {\r",
+											"        console.error(\"Ошибка регистрации\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    const accountId = registerResponse.id;\r",
+											"    if (!accountId) {\r",
+											"        console.error(\"В ответе регистрации нет id\");\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    pm.environment.set(\"accountId\", accountId);\r",
+											"\r",
+											"    const userDto = rnd.getUserDto();\r",
+											"  \r",
+											"   \r",
+											"    pm.request.body.update({\r",
+											"        mode: \"raw\",\r",
+											"        raw: JSON.stringify(userDto),\r",
+											"        options: { raw: { language: \"json\" } },\r",
+											"    });\r",
+											"   \r",
+											"    pm.environment.set(\"userDto\", JSON.stringify(userDto));\r",
+											"};\r",
+											"\r",
+											"const interval = setInterval(() => {}, 1000);\r",
+											"\r",
+											"setTimeout(async () => {\r",
+											"    try {\r",
+											"        await main();\r",
+											"    } catch (e) {\r",
+											"        console.error(e);\r",
+											"    } finally {\r",
+											"        clearInterval(interval);\r",
+											"    }\r",
+											"}, 100);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Статус должен быть 201 Created\", () => {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"const userDto = JSON.parse(pm.environment.get(\"userDto\"));\r",
+											"const responseUser = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Ответ содержит id\", () => {\r",
+											"    pm.expect(responseUser).to.have.property(\"id\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Поля пользователя должны совпадать с запросом\", () => {\r",
+											"    pm.expect(responseUser.lastName).to.eql(userDto.lastName);\r",
+											"    pm.expect(responseUser.firstName).to.eql(userDto.firstName);\r",
+											"    pm.expect(responseUser.birthDate).to.eql(userDto.birthDate);\r",
+											"    pm.expect(responseUser.email).to.eql(userDto.email);\r",
+											"    pm.expect(responseUser.phone).to.eql(userDto.phone);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Account-Id",
+										"value": "{{accountId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{request_body}}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get User by Id _auto",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"class API {\r",
+											"    constructor(pm, verbose = false, baseUrl = \"http://localhost:8080\") {\r",
+											"        this.baseUrl = baseUrl;\r",
+											"        this.pm = pm;\r",
+											"        this._verbose = verbose;\r",
+											"    }\r",
+											"\r",
+											"    async register(user, verbose = null) {\r",
+											"        return this.sendRequest(\"POST\", \"/api/auth/register\", user, \"Ошибка при регистрации аккаунта: \", verbose);\r",
+											"    }\r",
+											"\r",
+											"    async createUser(userDto, accountId, verbose = null) {\r",
+											"        return this.sendRequest(\r",
+											"            \"POST\",\r",
+											"            \"/api/users\",\r",
+											"            userDto,\r",
+											"            \"Ошибка при создании пользователя: \",\r",
+											"            verbose,\r",
+											"            { \"X-Account-Id\": accountId }\r",
+											"        );\r",
+											"    }\r",
+											"\r",
+											"    async sendRequest(method, path, body = null, errorText = \"Ошибка при выполнении запроса: \", verbose = null, headers = {}) {\r",
+											"        return new Promise((resolve, reject) => {\r",
+											"            verbose = verbose == null ? this._verbose : verbose;\r",
+											"            const request = {\r",
+											"                url: this.baseUrl + path,\r",
+											"                method: method,\r",
+											"                header: Object.assign({ \"Content-Type\": \"application/json\" }, headers)\r",
+											"            };\r",
+											"            if (method !== \"GET\" && body !== null) {\r",
+											"                request.body = {\r",
+											"                    mode: \"raw\",\r",
+											"                    raw: JSON.stringify(body),\r",
+											"                    options: { raw: { language: \"json\" } }\r",
+											"                };\r",
+											"            }\r",
+											"            if (verbose) console.log(\"Отправляю запрос: \", request);\r",
+											"\r",
+											"            try {\r",
+											"                this.pm.sendRequest(request, (error, response) => {\r",
+											"                    if (error || (response.code >= 400 && response.code <= 599)) {\r",
+											"                        let err = error ? error : JSON.stringify(response.json());\r",
+											"                        console.error(\"Ошибка при выполнении запроса:\\n\", err, \"\\nДанные запроса:\\n\", JSON.stringify(request));\r",
+											"                        reject(new Error(errorText + err));\r",
+											"                        return;\r",
+											"                    }\r",
+											"                    if (verbose) console.log(\"Результат: код - \", response.code, \", тело: \", response.json());\r",
+											"                    if (!response.json()) reject(new Error(\"Пустое тело ответа\"));\r",
+											"                    else resolve(response.json());\r",
+											"                });\r",
+											"            } catch (err) {\r",
+											"                if (verbose) console.error(errorText, err);\r",
+											"                reject(err);\r",
+											"            }\r",
+											"        });\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"class RandomUtils {\r",
+											"    getRegisterRequest() {\r",
+											"        return {\r",
+											"            login: pm.variables.replaceIn(\"user{{$randomInt}}@example.com\"),\r",
+											"            password: pm.variables.replaceIn(\"pass{{$randomInt}}\")\r",
+											"        };\r",
+											"    }\r",
+											"\r",
+											"    getUserDto() {\r",
+											"        const year = 1970 + Math.floor(Math.random() * 30);\r",
+											"        return {\r",
+											"            lastName: pm.variables.replaceIn(\"{{$randomLastName}}\"),\r",
+											"            firstName: pm.variables.replaceIn(\"{{$randomFirstName}}\"),\r",
+											"            birthDate: `${year}-01-01`,\r",
+											"            email: pm.variables.replaceIn(\"{{$randomEmail}}\"),\r",
+											"            phone: pm.variables.replaceIn(\"{{$randomPhoneNumber}}\")\r",
+											"        };\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"const main = async () => {\r",
+											"    const api = new API(pm, true);\r",
+											"    const rnd = new RandomUtils();\r",
+											"\r",
+											"    let registerResponse;\r",
+											"    try {\r",
+											"        registerResponse = await api.register(rnd.getRegisterRequest(), true);\r",
+											"    } catch (err) {\r",
+											"        console.error(\"Ошибка регистрации аккаунта\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"    const accountId = registerResponse.id;\r",
+											"    pm.environment.set(\"accountId\", accountId);\r",
+											"\r",
+											"    const userDto = rnd.getUserDto();\r",
+											"    pm.environment.set(\"expectedUserDto\", JSON.stringify(userDto));\r",
+											"\r",
+											"    let createUserResponse;\r",
+											"    try {\r",
+											"        createUserResponse = await api.createUser(userDto, accountId, true);\r",
+											"    } catch (err) {\r",
+											"        console.error(\"Ошибка создания пользователя\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"    const userId = createUserResponse.id;\r",
+											"\r",
+											"    console.info(\"ID пользователя\", userId);\r",
+											"    pm.environment.set(\"userId\", userId);\r",
+											"\r",
+											"};\r",
+											"const interval = setInterval(() => {}, 1000);\r",
+											"\r",
+											"setTimeout(async () => {\r",
+											"    try {\r",
+											"        await main();\r",
+											"    } catch (e) {\r",
+											"        console.error(e);\r",
+											"    } finally {\r",
+											"        clearInterval(interval);\r",
+											"    }\r",
+											"}, 100);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Статус ответа 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Ответ содержит все поля пользователя\", () => {\r",
+											"    const user = pm.response.json();\r",
+											"    pm.expect(user).to.have.property(\"id\");\r",
+											"    pm.expect(user).to.have.property(\"firstName\");\r",
+											"    pm.expect(user).to.have.property(\"lastName\");\r",
+											"    pm.expect(user).to.have.property(\"birthDate\");\r",
+											"    pm.expect(user).to.have.property(\"email\");\r",
+											"    pm.expect(user).to.have.property(\"phone\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Данные пользователя совпадают с ожидаемыми\", () => {\r",
+											"    const user = pm.response.json();\r",
+											"    const expected = JSON.parse(pm.environment.get(\"expectedUserDto\"));\r",
+											"\r",
+											"    pm.expect(user.firstName).to.eql(expected.firstName);\r",
+											"    pm.expect(user.lastName).to.eql(expected.lastName);\r",
+											"    pm.expect(user.birthDate).to.eql(expected.birthDate);\r",
+											"    pm.expect(user.email).to.eql(expected.email);\r",
+											"    pm.expect(user.phone).to.eql(expected.phone);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Account-Id",
+										"value": "{{accountId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{request_body}}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/users/{{userId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete_user",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"class API {\r",
+											"    constructor(pm, verbose = false, baseUrl = \"http://localhost:8080\") {\r",
+											"        this.baseUrl = baseUrl;\r",
+											"        this.pm = pm;\r",
+											"        this._verbose = verbose;\r",
+											"    }\r",
+											"\r",
+											"    async register(user, verbose = null) {\r",
+											"        return this.sendRequest(\"POST\", \"/api/auth/register\", user, \"Ошибка при регистрации аккаунта: \", verbose);\r",
+											"    }\r",
+											"\r",
+											"    async createUser(userDto, accountId, verbose = null) {\r",
+											"        return this.sendRequest(\r",
+											"            \"POST\",\r",
+											"            \"/api/users\",\r",
+											"            userDto,\r",
+											"            \"Ошибка при создании пользователя: \",\r",
+											"            verbose,\r",
+											"            { \"X-Account-Id\": accountId }\r",
+											"        );\r",
+											"    }\r",
+											"\r",
+											"    async sendRequest(method, path, body = null, errorText = \"Ошибка при выполнении запроса: \", verbose = null, headers = {}) {\r",
+											"        return new Promise((resolve, reject) => {\r",
+											"            verbose = verbose == null ? this._verbose : verbose;\r",
+											"            const request = {\r",
+											"                url: this.baseUrl + path,\r",
+											"                method: method,\r",
+											"                header: Object.assign(\r",
+											"                    { \"Content-Type\": \"application/json\" },\r",
+											"                    headers\r",
+											"                )\r",
+											"            };\r",
+											"            if (method !== \"GET\" && body !== null) {\r",
+											"                request.body = {\r",
+											"                    mode: \"raw\",\r",
+											"                    raw: JSON.stringify(body),\r",
+											"                    options: { raw: { language: \"json\" } },\r",
+											"                };\r",
+											"            }\r",
+											"            if (verbose) console.log(\"Отправляю запрос: \", request);\r",
+											"            try {\r",
+											"                this.pm.sendRequest(request, (error, response) => {\r",
+											"                    if (error || (response.code >= 400 && response.code <= 599)) {\r",
+											"                        let err = error ? error : JSON.stringify(response.json());\r",
+											"                        console.error(\"Ошибка при выполнении запроса:\\n\", err, \"\\nДанные запроса:\\n\", JSON.stringify(request));\r",
+											"                        reject(new Error(errorText + err));\r",
+											"                        return;\r",
+											"                    }\r",
+											"                    if (verbose) console.log(\"Результат: код - \", response.code, \", тело: \", response.json());\r",
+											"                    resolve(response.json());\r",
+											"                });\r",
+											"            } catch (err) {\r",
+											"                if (verbose) console.error(errorText, err);\r",
+											"                reject(err);\r",
+											"            }\r",
+											"        });\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"class RandomUtils {\r",
+											"    getRegisterRequest() {\r",
+											"        return {\r",
+											"            login: pm.variables.replaceIn(\"user{{$randomInt}}@example.com\"),\r",
+											"            password: pm.variables.replaceIn(\"pass{{$randomInt}}\"),\r",
+											"        };\r",
+											"    }\r",
+											"\r",
+											"    getUserDto() {\r",
+											"        const year = 1970 + Math.floor(Math.random() * 30);\r",
+											"        return {\r",
+											"            lastName: pm.variables.replaceIn(\"{{$randomLastName}}\"),\r",
+											"            firstName: pm.variables.replaceIn(\"{{$randomFirstName}}\"),\r",
+											"            birthDate: `${year}-01-01`,\r",
+											"            email: pm.variables.replaceIn(\"{{$randomEmail}}\"),\r",
+											"            phone: pm.variables.replaceIn(\"{{$randomPhoneNumber}}\")\r",
+											"        };\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"const main = async () => {\r",
+											"    const api = new API(pm, true);\r",
+											"    const rnd = new RandomUtils();\r",
+											"\r",
+											"    let registerResponse;\r",
+											"    try {\r",
+											"        registerResponse = await api.register(rnd.getRegisterRequest(), true);\r",
+											"    } catch (err) {\r",
+											"        console.error(\"Ошибка регистрации аккаунта\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"    const accountId = registerResponse.id;\r",
+											"    pm.environment.set(\"accountId\", accountId);\r",
+											"\r",
+											"    const userDto = rnd.getUserDto();\r",
+											"    pm.environment.set(\"expectedUserDto\", JSON.stringify(userDto));\r",
+											"\r",
+											"    let createUserResponse;\r",
+											"    try {\r",
+											"        createUserResponse = await api.createUser(userDto, accountId, true);\r",
+											"    } catch (err) {\r",
+											"        console.error(\"Ошибка создания пользователя\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"    const userId = createUserResponse.id;\r",
+											"    pm.environment.set(\"userId\", userId);\r",
+											"    \r",
+											"};\r",
+											"const interval = setInterval(() => {}, 1000);\r",
+											"\r",
+											"setTimeout(async () => {\r",
+											"    try {\r",
+											"        await main();\r",
+											"    } catch (e) {\r",
+											"        console.error(e);\r",
+											"    } finally {\r",
+											"        clearInterval(interval);\r",
+											"    }\r",
+											"}, 100);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Статус ответа 204 No Content\", () => {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Account-Id",
+										"value": "{{accountId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{request_body}}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/users/{{userId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"{{userId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update user fields_auto",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"class API {\r",
+											"    constructor(pm, verbose = false, baseUrl = \"http://localhost:8080\") {\r",
+											"        this.baseUrl = baseUrl;\r",
+											"        this.pm = pm;\r",
+											"        this._verbose = verbose;\r",
+											"    }\r",
+											"\r",
+											"    async register(user, verbose = null) {\r",
+											"        return this.sendRequest(\"POST\", \"/api/auth/register\", user, \"Ошибка при регистрации аккаунта: \", verbose);\r",
+											"    }\r",
+											"\r",
+											"    async createUser(userDto, accountId, verbose = null) {\r",
+											"        return this.sendRequest(\r",
+											"            \"POST\",\r",
+											"            \"/api/users\",\r",
+											"            userDto,\r",
+											"            \"Ошибка при создании пользователя: \",\r",
+											"            verbose,\r",
+											"            { \"X-Account-Id\": accountId }\r",
+											"        );\r",
+											"    }\r",
+											"\r",
+											"    async sendRequest(method, path, body = null, errorText = \"Ошибка при выполнении запроса: \", verbose = null, headers = {}) {\r",
+											"        return new Promise((resolve, reject) => {\r",
+											"            verbose = verbose == null ? this._verbose : verbose;\r",
+											"            const request = {\r",
+											"                url: this.baseUrl + path,\r",
+											"                method: method,\r",
+											"                header: Object.assign(\r",
+											"                    { \"Content-Type\": \"application/json\" },\r",
+											"                    headers\r",
+											"                )\r",
+											"            };\r",
+											"            if (method !== \"GET\" && body !== null) {\r",
+											"                request.body = {\r",
+											"                    mode: \"raw\",\r",
+											"                    raw: JSON.stringify(body),\r",
+											"                    options: { raw: { language: \"json\" } },\r",
+											"                };\r",
+											"            }\r",
+											"            if (verbose) console.log(\"Отправляю запрос: \", request);\r",
+											"            try {\r",
+											"                this.pm.sendRequest(request, (error, response) => {\r",
+											"                    if (error || (response.code >= 400 && response.code <= 599)) {\r",
+											"                        let err = error ? error : JSON.stringify(response.json());\r",
+											"                        console.error(\"Ошибка при выполнении запроса:\\n\", err, \"\\nДанные запроса:\\n\", JSON.stringify(request));\r",
+											"                        reject(new Error(errorText + err));\r",
+											"                        return;\r",
+											"                    }\r",
+											"                    if (verbose) console.log(\"Результат: код - \", response.code, \", тело: \", response.json());\r",
+											"                    resolve(response.json());\r",
+											"                });\r",
+											"            } catch (err) {\r",
+											"                if (verbose) console.error(errorText, err);\r",
+											"                reject(err);\r",
+											"            }\r",
+											"        });\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"class RandomUtils {\r",
+											"    getRegisterRequest() {\r",
+											"        return {\r",
+											"            login: pm.variables.replaceIn(\"user{{$randomInt}}@example.com\"),\r",
+											"            password: pm.variables.replaceIn(\"pass{{$randomInt}}\"),\r",
+											"        };\r",
+											"    }\r",
+											"\r",
+											"    getUserDto() {\r",
+											"        const year = 1970 + Math.floor(Math.random() * 30);\r",
+											"        return {\r",
+											"            lastName: pm.variables.replaceIn(\"{{$randomLastName}}\"),\r",
+											"            firstName: pm.variables.replaceIn(\"{{$randomFirstName}}\"),\r",
+											"            birthDate: `${year}-01-01`,\r",
+											"            email: pm.variables.replaceIn(\"{{$randomEmail}}\"),\r",
+											"            phone: pm.variables.replaceIn(\"{{$randomPhoneNumber}}\")\r",
+											"        };\r",
+											"    }\r",
+											"\r",
+											"    getUserDetailsDto() {\r",
+											"        return {\r",
+											"            lastName: pm.variables.replaceIn(\"{{$randomLastName}}\"),\r",
+											"            firstName: pm.variables.replaceIn(\"{{$randomFirstName}}\"),\r",
+											"            birthDate: \"1990-05-15\"\r",
+											"        };\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"const main = async () => {\r",
+											"    const api = new API(pm, true);\r",
+											"    const rnd = new RandomUtils();\r",
+											"\r",
+											"   \r",
+											"    let registerResponse;\r",
+											"    try {\r",
+											"        registerResponse = await api.register(rnd.getRegisterRequest(), true);\r",
+											"    } catch (err) {\r",
+											"        console.error(\"Ошибка регистрации аккаунта\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"    const accountId = registerResponse.id;\r",
+											"    pm.environment.set(\"accountId\", accountId);\r",
+											"\r",
+											"   \r",
+											"    const userDto = rnd.getUserDto();\r",
+											"    console.info(\"Изначально созданный пользователь\", userDto);\r",
+											"    \r",
+											"    pm.environment.set(\"expectedUserDto\", JSON.stringify(userDto));\r",
+											"\r",
+											"    let createUserResponse;\r",
+											"    try {\r",
+											"        createUserResponse = await api.createUser(userDto, accountId, true);\r",
+											"    } catch (err) {\r",
+											"        console.error(\"Ошибка создания пользователя\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"    const userId = createUserResponse.id;\r",
+											"    pm.environment.set(\"userId\", userId);\r",
+											"\r",
+											"    const userDetailsDto = rnd.getUserDetailsDto();\r",
+											"    console.info(\"Поля для обновления\", userDetailsDto);\r",
+											"    pm.environment.set(\"userDetailsDto\", JSON.stringify(userDetailsDto));\r",
+											"\r",
+											"  \r",
+											"    pm.request.body.update({\r",
+											"        mode: \"raw\",\r",
+											"        raw: JSON.stringify(userDetailsDto),\r",
+											"        options: { raw: { language: \"json\" } },\r",
+											"    });\r",
+											"\r",
+											"\r",
+											"};\r",
+											"const interval = setInterval(() => {}, 1000);\r",
+											"\r",
+											"setTimeout(async () => {\r",
+											"    try {\r",
+											"        await main();\r",
+											"    } catch (e) {\r",
+											"        console.error(e);\r",
+											"    } finally {\r",
+											"        clearInterval(interval);\r",
+											"    }\r",
+											"}, 100);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Статус ответа 200 OK\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"const responseJson = pm.response.json();\r",
+											"const original = JSON.parse(pm.environment.get(\"expectedUserDto\"));  // полный userDto до патча\r",
+											"const updatedFields = JSON.parse(pm.environment.get(\"userDetailsDto\")); // patch с обновленными полями\r",
+											"\r",
+											"pm.test(\"Поле lastName обновлено корректно\", () => {\r",
+											"    pm.expect(responseJson).to.have.property(\"lastName\");\r",
+											"    pm.expect(responseJson.lastName).to.eql(updatedFields.lastName);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Поле firstName обновлено корректно\", () => {\r",
+											"    pm.expect(responseJson).to.have.property(\"firstName\");\r",
+											"    pm.expect(responseJson.firstName).to.eql(updatedFields.firstName);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Поле birthDate обновлено корректно\", () => {\r",
+											"    pm.expect(responseJson).to.have.property(\"birthDate\");\r",
+											"    pm.expect(responseJson.birthDate).to.eql(updatedFields.birthDate);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"[\"email\", \"phone\"].forEach(field => {\r",
+											"    pm.test(`Поле ${field} осталось без изменений`, () => {\r",
+											"        pm.expect(responseJson).to.have.property(field);\r",
+											"        pm.expect(responseJson[field]).to.eql(original[field]);\r",
+											"    });\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Account-Id",
+										"value": "{{accountId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{request_body}}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/users/{{userId}}/details",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"{{userId}}",
+										"details"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update user contacts_auto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const expectedContacts = JSON.parse(pm.environment.get(\"userContactsDto\"));\r",
+											"const actualUser = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Email обновлён корректно\", () => {\r",
+											"    pm.expect(actualUser.email).to.eql(expectedContacts.email);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Phone обновлён корректно\", () => {\r",
+											"    pm.expect(actualUser.phone).to.eql(expectedContacts.phone);\r",
+											"});\r",
+											"\r",
+											"const originalUserDto = JSON.parse(pm.environment.get(\"expectedUserDto\"));\r",
+											"\r",
+											"pm.test(\"LastName не изменён\", () => {\r",
+											"    pm.expect(actualUser.lastName).to.eql(originalUserDto.lastName);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"FirstName не изменён\", () => {\r",
+											"    pm.expect(actualUser.firstName).to.eql(originalUserDto.firstName);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"BirthDate не изменён\", () => {\r",
+											"    pm.expect(actualUser.birthDate).to.eql(originalUserDto.birthDate);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"class API {\r",
+											"    constructor(pm, verbose = false, baseUrl = \"http://localhost:8080\") {\r",
+											"        this.baseUrl = baseUrl;\r",
+											"        this.pm = pm;\r",
+											"        this._verbose = verbose;\r",
+											"    }\r",
+											"\r",
+											"    async register(user, verbose = null) {\r",
+											"        return this.sendRequest(\"POST\", \"/api/auth/register\", user, \"Ошибка при регистрации аккаунта: \", verbose);\r",
+											"    }\r",
+											"\r",
+											"    async createUser(userDto, accountId, verbose = null) {\r",
+											"        return this.sendRequest(\r",
+											"            \"POST\",\r",
+											"            \"/api/users\",\r",
+											"            userDto,\r",
+											"            \"Ошибка при создании пользователя: \",\r",
+											"            verbose,\r",
+											"            { \"X-Account-Id\": accountId }\r",
+											"        );\r",
+											"    }\r",
+											"\r",
+											"    async sendRequest(method, path, body = null, errorText = \"Ошибка при выполнении запроса: \", verbose = null, headers = {}) {\r",
+											"        return new Promise((resolve, reject) => {\r",
+											"            verbose = verbose == null ? this._verbose : verbose;\r",
+											"            const request = {\r",
+											"                url: this.baseUrl + path,\r",
+											"                method: method,\r",
+											"                header: Object.assign(\r",
+											"                    { \"Content-Type\": \"application/json\" },\r",
+											"                    headers\r",
+											"                )\r",
+											"            };\r",
+											"            if (method !== \"GET\" && body !== null) {\r",
+											"                request.body = {\r",
+											"                    mode: \"raw\",\r",
+											"                    raw: JSON.stringify(body),\r",
+											"                    options: { raw: { language: \"json\" } },\r",
+											"                };\r",
+											"            }\r",
+											"            if (verbose) console.log(\"Отправляю запрос: \", request);\r",
+											"            try {\r",
+											"                this.pm.sendRequest(request, (error, response) => {\r",
+											"                    if (error || (response.code >= 400 && response.code <= 599)) {\r",
+											"                        let err = error ? error : JSON.stringify(response.json());\r",
+											"                        console.error(\"Ошибка при выполнении запроса:\\n\", err, \"\\nДанные запроса:\\n\", JSON.stringify(request));\r",
+											"                        reject(new Error(errorText + err));\r",
+											"                        return;\r",
+											"                    }\r",
+											"                    if (verbose) console.log(\"Результат: код - \", response.code, \", тело: \", response.json());\r",
+											"                    resolve(response.json());\r",
+											"                });\r",
+											"            } catch (err) {\r",
+											"                if (verbose) console.error(errorText, err);\r",
+											"                reject(err);\r",
+											"            }\r",
+											"        });\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"class RandomUtils {\r",
+											"    getRegisterRequest() {\r",
+											"        return {\r",
+											"            login: pm.variables.replaceIn(\"user{{$randomInt}}@example.com\"),\r",
+											"            password: pm.variables.replaceIn(\"pass{{$randomInt}}\"),\r",
+											"        };\r",
+											"    }\r",
+											"\r",
+											"    getUserDto() {\r",
+											"        const year = 1970 + Math.floor(Math.random() * 30);\r",
+											"        return {\r",
+											"            lastName: pm.variables.replaceIn(\"{{$randomLastName}}\"),\r",
+											"            firstName: pm.variables.replaceIn(\"{{$randomFirstName}}\"),\r",
+											"            birthDate: `${year}-01-01`,\r",
+											"            email: pm.variables.replaceIn(\"{{$randomEmail}}\"),\r",
+											"            phone: pm.variables.replaceIn(\"{{$randomPhoneNumber}}\")\r",
+											"        };\r",
+											"    }\r",
+											"\r",
+											"    getUserContactsDto() {\r",
+											"        return {\r",
+											"            email: pm.variables.replaceIn(\"new.email{{$randomInt}}@example.com\"),\r",
+											"            phone: pm.variables.replaceIn(\"555-123-4567\")\r",
+											"        };\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"const main = async () => {\r",
+											"    const api = new API(pm, true);\r",
+											"    const rnd = new RandomUtils();\r",
+											"\r",
+											"\r",
+											"    let registerResponse;\r",
+											"    try {\r",
+											"        registerResponse = await api.register(rnd.getRegisterRequest(), true);\r",
+											"    } catch (err) {\r",
+											"        console.error(\"Ошибка регистрации аккаунта\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"    const accountId = registerResponse.id;\r",
+											"    pm.environment.set(\"accountId\", accountId);\r",
+											"\r",
+											"  \r",
+											"    const userDto = rnd.getUserDto();\r",
+											"    pm.environment.set(\"expectedUserDto\", JSON.stringify(userDto));\r",
+											"\r",
+											"    let createUserResponse;\r",
+											"    try {\r",
+											"        createUserResponse = await api.createUser(userDto, accountId, true);\r",
+											"    } catch (err) {\r",
+											"        console.error(\"Ошибка создания пользователя\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"    const userId = createUserResponse.id;\r",
+											"    pm.environment.set(\"userId\", userId);\r",
+											"\r",
+											"    const userContactsDto = rnd.getUserContactsDto();\r",
+											"    console.info(\"Данные для обновления контактов:\", userContactsDto);\r",
+											"    pm.environment.set(\"userContactsDto\", JSON.stringify(userContactsDto));\r",
+											"\r",
+											" \r",
+											"    pm.request.body.update({\r",
+											"        mode: \"raw\",\r",
+											"        raw: JSON.stringify(userContactsDto),\r",
+											"        options: { raw: { language: \"json\" } },\r",
+											"    });\r",
+											"\r",
+											" \r",
+											"};\r",
+											"\r",
+											"const interval = setInterval(() => {}, 1000);\r",
+											"\r",
+											"setTimeout(async () => {\r",
+											"    try {\r",
+											"        await main();\r",
+											"    } catch (e) {\r",
+											"        console.error(e);\r",
+											"    } finally {\r",
+											"        clearInterval(interval);\r",
+											"    }\r",
+											"}, 100);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "X-Account-Id",
+										"value": "{{accountId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{request_body}}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/users/{{userId}}/contacts",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"{{userId}}",
+										"contacts"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"\r",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "request_body",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

@@ -83,3 +83,6 @@ url: jdbc:postgresql://auth-db:5432/auth-db для auth-service
 ### Для тестирования
 
 В первую очередь производится регистрация в auth-service (логин, пароль), затем добавление данных в account service
+
+[Коллекция тестов для postman](./postman/UserProfilApi.postman_collection.json) представлена набором автотестов и 
+тестов для самостоятельного тестирования (подстановка своих значений) 

@@ -87,6 +87,23 @@ services:
 
     networks:
       - microservices-net
+
+  user-service:
+    build:
+      context: .
+      dockerfile: user_service/Dockerfile
+    container_name: user-service
+    depends_on:
+      config-server:
+        condition: service_healthy
+      auth-db:
+        condition: service_healthy
+    environment:
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://discovery-server:8761/eureka/
+
+    networks:
+      - microservices-net
+
   gateway-service:
     build:
       context: .
