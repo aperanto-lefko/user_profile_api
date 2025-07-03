@@ -9,13 +9,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+import ru.telros.practicum.entity.Account;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.UUID;
 
 @Component
 @Slf4j
-public class JwtProvider {
+public class AuthServiceJwtProvider {
     @Value("${jwt.secret}")
     private String secret;
 
@@ -23,7 +25,10 @@ public class JwtProvider {
     private long expiration;
 
     public String generateToken(Authentication authentication) {
+        Account account = (Account) authentication.getPrincipal();
         String username = authentication.getName();
+        UUID accountId = account.getId();
+
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expiration);
 
@@ -31,6 +36,7 @@ public class JwtProvider {
                 .setSubject(username)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
+                .claim("accountId", accountId.toString())
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
