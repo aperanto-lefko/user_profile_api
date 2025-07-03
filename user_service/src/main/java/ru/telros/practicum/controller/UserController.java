@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import ru.telros.practicum.config.AuthContext;
+import ru.telros.practicum.config.SecurityContext;
 import ru.telros.practicum.dto.user_service.UserContactsDto;
 import ru.telros.practicum.dto.user_service.UserDetailsDto;
 import ru.telros.practicum.dto.user_service.UserDto;
@@ -33,30 +32,27 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserController {
     UserService userService;
-    AuthContext authContext;
+    SecurityContext securityContext;
 
     @GetMapping("/{userId}")
-    ResponseEntity<UserDto> getUserById(@PathVariable("userId") UUID userId,
-                                        @RequestHeader("X-Account-Id") UUID oldAccountId) {
-        UUID accountId = authContext.getAccountId();
+    ResponseEntity<UserDto> getUserById(@PathVariable("userId") UUID userId) {
+        UUID accountId = securityContext.getAccountId();
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(userService.getUserById(userId, accountId));
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody @Valid UserDto userDto,
-                                              @RequestHeader("X-Account-Id") UUID oldAccountId) {
-        UUID accountId = authContext.getAccountId();
+    public ResponseEntity<UserDto> createUser(@RequestBody @Valid UserDto userDto) {
+        UUID accountId = securityContext.getAccountId();
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(userService.createUser(userDto, accountId));
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<Void> deleteUser(@PathVariable("userId") UUID userId,
-                                           @RequestHeader("X-Account-Id") UUID oldAccountId) {
-        UUID accountId = authContext.getAccountId();
+    public ResponseEntity<Void> deleteUser(@PathVariable("userId") UUID userId) {
+        UUID accountId = securityContext.getAccountId();
         userService.deleteUserById(userId, accountId);
         return ResponseEntity
                 .status(HttpStatus.NO_CONTENT)
@@ -65,9 +61,8 @@ public class UserController {
 
     @PatchMapping("/{userId}/details")
     public ResponseEntity<UserDto> updateUserDetails(@PathVariable("userId") UUID userId,
-                                                     @RequestBody @Valid UserDetailsDto userDetailsDto,
-                                                     @RequestHeader("X-Account-Id") UUID oldAccountId) {
-        UUID accountId = authContext.getAccountId();
+                                                     @RequestBody @Valid UserDetailsDto userDetailsDto) {
+        UUID accountId = securityContext.getAccountId();
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(userService.updateUserDetails(userId, userDetailsDto, accountId));
@@ -75,9 +70,8 @@ public class UserController {
 
     @PatchMapping("/{userId}/contacts")
     public ResponseEntity<UserDto> updateUserContacts(@PathVariable("userId") UUID userId,
-                                                      @RequestBody @Valid UserContactsDto userContactsDto,
-                                                      @RequestHeader("X-Account-Id") UUID oldAccountId) {
-        UUID accountId = authContext.getAccountId();
+                                                      @RequestBody @Valid UserContactsDto userContactsDto) {
+        UUID accountId = securityContext.getAccountId();
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(userService.updateUserContacts(userId, userContactsDto, accountId));
@@ -95,9 +89,8 @@ public class UserController {
     }
 
     @GetMapping("/{userId}/photo")
-    public ResponseEntity<byte[]> getPhoto(@PathVariable("userId") UUID userId,
-                                           @RequestHeader("X-Account-Id") UUID oldAccountId) {
-        UUID accountId = authContext.getAccountId();
+    public ResponseEntity<byte[]> getPhoto(@PathVariable("userId") UUID userId) {
+        UUID accountId = securityContext.getAccountId();
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .contentType(MediaType.IMAGE_JPEG)
@@ -107,9 +100,8 @@ public class UserController {
 
     @DeleteMapping("/{userId}/photo")
 
-    public ResponseEntity<Void> deletePhoto(@PathVariable("userId") UUID userId,
-                                            @RequestHeader("X-Account-Id") UUID oldAccountId) {
-        UUID accountId = authContext.getAccountId();
+    public ResponseEntity<Void> deletePhoto(@PathVariable("userId") UUID userId) {
+        UUID accountId = securityContext.getAccountId();
         userService.deletePhoto(userId, accountId);
         return ResponseEntity
                 .status(HttpStatus.NO_CONTENT)

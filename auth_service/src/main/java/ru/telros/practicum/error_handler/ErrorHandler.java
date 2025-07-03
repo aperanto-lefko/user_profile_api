@@ -28,6 +28,7 @@ public class ErrorHandler extends BaseErrorHandler {
     }
 
 
+
     @Override
     protected String getFriendlyMessage(RuntimeException ex) {
         String className = ex.getClass().getSimpleName();

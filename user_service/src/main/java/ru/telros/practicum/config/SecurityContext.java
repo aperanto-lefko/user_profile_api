@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
-public class AuthContext {
+public class SecurityContext {
     /**
      * Метод, извлекающий accountId из SecurityContext (из токена)
      * @return
